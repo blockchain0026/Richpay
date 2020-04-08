@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model WebMVC.Areas.Identity.Pages.Account.LoginModel.LoginWithTwoFactorAuthViewModel
+@{
+}
+
+<div class="kt-login__signup">
+    <div class="kt-login__head">
+        <h3 class="kt-login__title">GA验证</h3>
+        <div class="kt-login__desc">您的登录信息受到验证保护。 在下面输入您的认证码。</div>
+    </div>
+    <form class="kt-form" method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="input-group">
+            <input id="2fa_code" class="form-control" asp-for="TwoFactorCode" type="text" name="twofactorcode" placeholder="请输入 6 位数字验证码" autocomplete="off">
+        </div>
+        <div class="row kt-login__extra">
+            <div class="col kt-align-left">
+                <label class="kt-checkbox">
+                    <input asp-for="RememberMachine" type="checkbox" name="remembermachine">日后在这台机器上不必输入认证码。
+                    <span></span>
+                </label>
+                <span class="form-text text-muted"></span>
+            </div>
+        </div>
+        <div class="kt-login__actions">
+            <button type="submit" id="kt_login_two_factor_auth_submit" class="btn btn-brand btn-elevate kt-login__btn-primary" asp-page-handler="LoginWithTwoFactorAuth">提交</button> &nbsp;&nbsp;
+            <button id="kt_login_signup_cancel" class="btn btn-light btn-elevate kt-login__btn-secondary">取消</button>
+        </div>
+    </form>
+</div>

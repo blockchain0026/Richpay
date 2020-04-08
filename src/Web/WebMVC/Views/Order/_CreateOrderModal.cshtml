@@ -1,0 +1,74 @@
+﻿@model WebMVC.ViewModels.OrderViewModels.IndexViewModel
+@using WebMVC.Models.Roles
+
+<div id="modal__create_order_to_platform" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">建立订单</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_create_order_to_platform" asp-controller="Order" asp-action="CreateOrderToPlatform" class="kt-form" method="post">
+                    <div class="form-group">
+                        @if (User.IsInRole(Roles.Manager))
+                        {
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">商户编号</label>
+                                <div class=" col-lg-4 col-md-9 col-sm-12">
+                                    <select class="form-control kt-select2" id="kt_select2_create_order_to_platform_shop" name="shopid">
+                                        <option></option>
+                                    </select>
+                                    <span class="form-text text-muted">选择预建立订单的商户。</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <label for="shopId" class="form-control-label">商户编号 :</label>
+                            <input type="text" class="form-control"  value="@Model.UserId" name="shopid" readonly>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="ShopOrderId" class="form-control-label">商户订单号 :</label>
+                        <input type="text" class="form-control" name="shoporderid">
+                    </div>
+                    <div class="form-group">
+                        <label for="ShopOrderAmount" class="form-control-label">订单金额 :</label>
+                        <input type="text" class="form-control" name="shoporderamount">
+                    </div>
+                    <div class="form-group">
+                        <label for="ShopReturnUrl" class="form-control-label">支付成功后跳转页面 :</label>
+                        <input type="text" class="form-control" name="shopreturnurl" value="https://www.richpay168.com/">
+                    </div>
+                    <div class="form-group">
+                        <label for="ShopOkReturnUrl" class="form-control-label">服务端异步通知链接 :</label>
+                        <input type="text" class="form-control" name="shopokreturnurl" value="https://www.richpay168.com/">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">支付类型</label>
+                        <div class=" col-lg-4 col-md-9 col-sm-12">
+                            <select class="form-control kt-select2" id="select_create_order_to_platform_order_gateway_type" name="ordergatewaytype">
+                                <option value="">请选择...</option>
+                                <option value="1">微信个码</option>
+                                <option value="2">微信原生码</option>
+                                <option value="3">支付宝个码</option>
+                                <option value="4">支付宝原生码</option>
+                                <option value="5">支付宝转账</option>
+                                <option value="6">支付宝转银</option>
+                                <option value="7">支付宝红包</option>
+                                <option value="8">支付宝口令红包</option>
+                            </select>
+                            <span class="form-text text-muted">选择支付类型。</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

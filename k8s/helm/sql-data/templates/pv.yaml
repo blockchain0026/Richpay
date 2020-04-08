@@ -1,0 +1,18 @@
+{{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ template "sql-data.fullname" . }}
+spec:
+  storageClassName: ""
+  capacity:
+    storage: {{ .Values.persistence.size | quote }}
+  accessModes:
+    - {{ .Values.persistence.accessMode | quote }}
+  claimRef:
+    namespace: {{ .Values.persistence.claimRefNamespace | quote }}
+    name: {{ .Values.persistence.claimRefName | quote }}
+  gcePersistentDisk:
+    pdName: {{ .Values.persistence.pdName | quote }}
+    fsType: {{ .Values.persistence.fsType | quote }}
+{{- end }}

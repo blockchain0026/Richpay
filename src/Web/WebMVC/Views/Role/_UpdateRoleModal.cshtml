@@ -1,0 +1,44 @@
+﻿<div id="modal__update_role" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">更新角色权限</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_update_role" asp-controller="Role" asp-action="Update" class="kt-form" method="post">
+                    <div class="form-group">
+
+                        <label class="form-control-label">角色名称 :</label>
+                        <input id="update_role_input_role_name" type="text" class="form-control" name="rolename" readonly >
+                    </div>
+
+
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    权限分配
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body">
+                            <div id="update_role_tree_permissions" class="tree-demo">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="update_role_permissions_list">
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

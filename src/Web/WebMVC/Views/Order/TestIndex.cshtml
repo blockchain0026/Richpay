@@ -1,0 +1,26 @@
+﻿@model WebMVC.ViewModels.OrderViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "TestIndex";
+    Layout = "";
+}
+
+
+
+<html>
+<head>
+
+</head>
+
+<body>
+
+    <h1>Index</h1>
+
+
+    扫我H5跳转等待
+    <img src="@Model.QrCodeImageData" alt="" style="height:150px;width:150px" />
+
+
+    <a href="@Model.H5PaymentPageUrl" class="btn">点我H5跳转等待</a>
+</body>
+</html>

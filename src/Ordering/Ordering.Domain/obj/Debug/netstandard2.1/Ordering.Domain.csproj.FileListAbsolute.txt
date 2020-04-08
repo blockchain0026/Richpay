@@ -1,0 +1,16 @@
+C:\repo\Richpay\src\Ordering\Ordering.Domain\bin\Debug\netstandard2.1\Ordering.Domain.deps.json
+C:\repo\Richpay\src\Ordering\Ordering.Domain\bin\Debug\netstandard2.1\Ordering.Domain.dll
+C:\repo\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.AssemblyInfoInputs.cache
+C:\repo\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.AssemblyInfo.cs
+C:\repo\Richpay\src\Ordering\Ordering.Domain\bin\Debug\netstandard2.1\Ordering.Domain.pdb
+C:\repo\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.dll
+C:\repo\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.pdb
+C:\repo\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\bin\Debug\netstandard2.1\Ordering.Domain.deps.json
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\bin\Debug\netstandard2.1\Ordering.Domain.dll
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\bin\Debug\netstandard2.1\Ordering.Domain.pdb
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.AssemblyInfo.cs
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.dll
+C:\Users\User\Desktop\Richpay\src\Ordering\Ordering.Domain\obj\Debug\netstandard2.1\Ordering.Domain.pdb

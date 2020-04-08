@@ -1,0 +1,8 @@
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\bin\Debug\netstandard2.1\WebMVC.Model.deps.json
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\bin\Debug\netstandard2.1\WebMVC.Model.dll
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\bin\Debug\netstandard2.1\WebMVC.Model.pdb
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\obj\Debug\netstandard2.1\WebMVC.Model.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\obj\Debug\netstandard2.1\WebMVC.Model.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\obj\Debug\netstandard2.1\WebMVC.Model.AssemblyInfo.cs
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\obj\Debug\netstandard2.1\WebMVC.Model.dll
+C:\Users\User\Desktop\Richpay\src\Web\WebMVC.Model\obj\Debug\netstandard2.1\WebMVC.Model.pdb

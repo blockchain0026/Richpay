@@ -1,0 +1,346 @@
+﻿@model WebMVC.ViewModels.OrderViewModels.IndexViewModel
+
+@using WebMVC.Models.Roles
+@using WebMVC.Extensions
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    ViewData["UserRole"] = "";
+
+    if (User.IsInRole(Roles.Manager))
+    {
+        ViewData["UserRole"] = "Manager";
+    }
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+    <!-- begin:: Content Head -->
+    <div class="kt-subheader  kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    订单列表
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <div class="kt-subheader__group" id="kt_subheader_search">
+                    <span class="kt-subheader__desc" id="kt_subheader_total">
+                        共  笔
+                    </span>
+
+                    <!--begin::Search Box-->
+                    <form class="kt-margin-l-20" id="kt_subheader_search_form">
+                        <div class="kt-input-icon kt-input-icon--right kt-subheader__search">
+                            <input type="text" class="form-control" placeholder="搜索..." id="generalSearch">
+                            <span class="kt-input-icon__icon kt-input-icon__icon--right">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero" />
+                                        </g>
+                                    </svg>
+                                    <!--<i class="flaticon2-search-1"></i>-->
+                                </span>
+                            </span>
+                        </div>
+                    </form>
+                    <!--end::Search Box-->
+                    <!--begin::Date Range Picker-->
+                    <div class="col-lg-3">
+                        <div class="kt-input-icon kt-input-icon--pill kt-input-icon--right" style="width:220px;">
+                            <a href="#" class="form-control form-control-pill" id="kt_dashboard_daterangepicker" data-toggle="kt-tooltip" title="" data-placement="left" data-original-title="选取订单日期">
+                                <span class="" id="kt_dashboard_daterangepicker_date"></span>
+                            </a>
+                            <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="flaticon2-calendar-1"></i></span></span>
+
+                            <input id="order_search_from" name="from" hidden />
+                            <input id="order_search_to" name="to" hidden />
+                        </div>
+                    </div>
+                    <!--end::Date Range Picker-->
+                </div>
+                <div class="kt-subheader__group kt-hidden" id="kt_subheader_group_actions">
+                    <div class="kt-subheader__desc"><span id="kt_subheader_group_selected_rows"></span> 快速操作:</div>
+                    <div class="btn-toolbar kt-margin-l-20">
+                        @if (User.IsInRole(Roles.Manager))
+                        {
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <a href="#" class="">
+                </a>
+                <a class="btn btn-label-brand btn-bold" data-toggle="show-modal-create-order-to-platform" data-user-id="@Model.UserId" data-user-base-role="@Model.UserBaseRole">
+                    添加订单
+                </a>
+                <a class="btn btn-label-danger btn-bold" data-toggle="show-modal-delete-all-test-orders" data-user-id="@Model.UserId" data-user-base-role="@Model.UserBaseRole">
+                    删除测试订单
+                </a>
+                @if (User.IsInRole(Roles.Manager) /*false*/)
+                {<div class="kt-subheader__wrapper">
+                        <div class="dropdown dropdown-inline" data-toggle="kt-tooltip-" title="Quick actions" data-placement="left">
+                            <a href="#" class="btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--success kt-svg-icon--md">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                        <path d="M11,14 L9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 L11,12 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,12 L15,12 C15.5522847,12 16,12.4477153 16,13 C16,13.5522847 15.5522847,14 15,14 L13,14 L13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,14 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+
+                                <!--<i class="flaticon2-plus"></i>-->
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-md dropdown-menu-right">
+
+                                <!--begin::Nav-->
+                                <ul class="kt-nav">
+                                    <li class="kt-nav__head">
+                                        添加订单:
+                                        <i class="flaticon2-information" data-toggle="kt-tooltip" data-placement="right" title="选择要添加的类型..."></i>
+                                    </li>
+                                    <li class="kt-nav__separator"></li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" data-toggle="show-modal-create-concurrency-order-two-times">
+                                            <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                            <span class="kt-nav__link-text">测试订单(2笔)</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" data-toggle="show-modal-create-concurrency-order-two-times-with-confirms">
+                                            <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                            <span class="kt-nav__link-text">测试订单(2笔+自动确认)</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" data-toggle="show-modal-create-concurrency-order-five-times">
+                                            <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                            <span class="kt-nav__link-text">测试订单(5笔)</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" data-toggle="show-modal-create-concurrency-order-five-times-per-second">
+                                            <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                            <span class="kt-nav__link-text">测试订单(x笔/秒)</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" data-toggle="show-modal-create-api-order-five-times-per-second">
+                                            <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                            <span class="kt-nav__link-text">API测试订单(x笔/秒)</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" data-toggle="show-modal-create-merchant">
+                                            <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                            <span class="kt-nav__link-text">正式订单(对码商)</span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!--end::Nav-->
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- end:: Content Head -->
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <!--begin::Portlet-->
+        <div class="kt-portlet kt-portlet--mobile">
+
+            <!--begin::Search Filter-->
+            <div class="kt-portlet__body kt-padding-t-0">
+                <!--begin: Search Form -->
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <!--<div class="col-md-3 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>订单类型:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <select class="form-control bootstrap-select" id="kt_order_type_filter">
+                                                <option value="">全部</option>
+                                                <option value="ShopToPlatform">平台订单</option>
+                                                <option value="AdminToPlatform">测试订单</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <div class="col-md-2 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>订单状态:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <select class="form-control bootstrap-select" id="kt_order_status_filter">
+                                                <option value="">全部</option>
+                                                <option value="Submitted">提交</option>
+                                                <option value="AwaitingPayment">付款中</option>
+                                                <option value="Success">成功</option>
+                                                <option value="Failed">失败</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>支付类型:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <select class="form-control bootstrap-select" id="kt_order_payment_channel_filter">
+                                                <option value="">全部</option>
+                                                <option value="Alipay">支付宝</option>
+                                                <option value="Wechat">微信</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>支付通道:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <select class="form-control bootstrap-select" id="kt_order_payment_scheme_filter">
+                                                <option value="">全部</option>
+                                                <option value="Barcode">个码</option>
+                                                <option value="Merchant">原生码</option>
+                                                <option value="Transaction">转账</option>
+                                                <option value="Bank">转银行</option>
+                                                <option value="Envelop">红包</option>
+                                                <option value="EnvelopPassword">口令红包</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 kt-margin-l-100  kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>总笔数:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <h4 id="sum_data_order_total_count">0笔</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>总成交:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <h4 id="sum_data_order_total_success_amount" class="kt-font-primary">0¥</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (User.IsInRole(Roles.Manager))
+                                {
+                                    <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="">
+                                            <div class="kt-form__label">
+                                                <label>平台总利润 :</label>
+                                            </div>
+                                            <div class="kt-form__control">
+                                                <h4 id="sum_data_order_total_platform_commission" class="kt-font-success">0¥</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="">
+                                            <div class="kt-form__label">
+                                                <label>商代总分红:</label>
+                                            </div>
+                                            <div class="kt-form__control">
+                                                <h4 id="sum_data_order_total_shop_user_commission" class="kt-font-success">0¥</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="">
+                                            <div class="kt-form__label">
+                                                <label>码商总分红:</label>
+                                            </div>
+                                            <div class="kt-form__control">
+                                                <h4 id="sum_data_order_total_trade_user_commission" class="kt-font-success">0¥</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (User.IsInRole(Roles.Shop))
+                                {
+                                    <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="">
+                                            <div class="kt-form__label">
+                                                <label>总利润:</label>
+                                            </div>
+                                            <div class="kt-form__control">
+                                                <h4 id="sum_data_order_total_shop_commission" class="kt-font-success">0¥</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (User.IsInRole(Roles.Trader))
+                                {
+                                    <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="">
+                                            <div class="kt-form__label">
+                                                <label>总利润:</label>
+                                            </div>
+                                            <div class="kt-form__control">
+                                                <h4 id="sum_data_order_total_trader_commission" class="kt-font-success">0¥</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end: Search Form -->
+            </div>
+            <!--end::Search Filter-->
+
+            <div class="kt-portlet__body kt-portlet__body--fit">
+                <!--begin: Datatable -->
+                <div class="kt-datatable" id="kt_apps_order_list_datatable"></div>
+                <!--end: Datatable -->
+                <input id="user_role" value="@Model.UserBaseRole" hidden />
+            </div>
+        </div>
+
+
+
+        <!--end::Portlet-->
+        <!--begin::Modal-->
+        <partial name="_CreateOrderModal" model="@Model" />
+
+        <partial name="_UserInfoModal" />
+        <!--end::Modal-->
+    </div>
+    <!-- end:: Content -->
+</div>
+
+@section AddToHead{
+    <link href="~/css/wizard/wizard-1.css" rel="stylesheet" type="text/css" />
+}
+@section Scripts {
+    <!--begin::Page Scripts(used by this page) -->
+    <script src="~/js/pages/order-management/to-platform/list-datatable-order.js" type="text/javascript"></script>
+    <script src="~/js/shared/jquery.md5.js" type="text/javascript"></script>
+    <script src="~/lib/metronic/dist/assets/js/pages/crud/forms/widgets/bootstrap-switch.js" type="text/javascript"></script>
+    <!--end::Page Scripts -->
+}

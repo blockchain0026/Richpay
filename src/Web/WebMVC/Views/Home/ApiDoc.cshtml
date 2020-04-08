@@ -1,0 +1,481 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>商户API文档</title>
+    <!--begin::Fonts -->
+    <!--end::Fonts -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="Latest updates and statistic charts">
+
+    <link href="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/metronic/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <style>
+        td, th {
+            border: 1px solid #C0C0C0;
+            padding: 6px;
+        }
+
+        p {
+            margin-top: 15px;
+        }
+
+        body {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+    <div class="kt-portlet kt-portlet--tabs">
+        <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">
+                    商户API文档
+                </h3>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+                <ul class="nav nav-tabs nav-tabs-bold nav-tabs-line   nav-tabs-line-right nav-tabs-line-brand" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#kt_portlet_tab_1_1" role="tab">
+                            建立订单
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_portlet_tab_1_2" role="tab">
+                            查询订单
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_portlet_tab_1_3" role="tab">
+                            异步通知
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_portlet_tab_1_4" role="tab">
+                            [附件] 支付类型
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <div class="tab-content">
+                <div class="tab-pane active" id="kt_portlet_tab_1_1">
+                    <div data-v-bd24ed88="" data-v-d6b14fc8="" id="editor-md" class="main-editor markdown-body editormd-html-preview">
+                        <!---->
+                        <p><strong>简要描述：</strong> </p>
+                        <ul>
+                            <li>建立订单接口</li>
+                        </ul>
+                        <p><strong>请求URL：</strong> </p>
+                        <ul>
+                            <li><code style="color: rgb(221, 17, 68);">https://www.richpay168.com/api/order</code></li>
+                        </ul>
+                        <p><strong>请求方式：</strong></p>
+                        <ul>
+                            <li>POST </li>
+                        </ul>
+                        <!--<p><strong>参数：</strong> </p>
+    <div style="width: 100%;overflow-x: auto;">
+        <table>
+            <thead>
+                <tr style="background-color: rgb(64, 158, 255); color: rgb(255, 255, 255);">
+                    <th style="text-align: left; width: 173px;">参数名</th>
+                    <th style="text-align: left; width: 173px;">必选</th>
+                    <th style=" text-align: left; width: 173px; ">类型</th>
+                    <th style="width: 173px;">说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: rgb(255, 255, 255);">
+                    <td style="text-align:left;">data</td>
+                    <td style="text-align:left;">是</td>
+                    <td style="text-align:left;">json</td>
+                    <td>数据内容</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>-->
+                        <p><strong>数据内容：</strong> </p>
+                        <div style="width: 100%;overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr style="background-color: rgb(64, 158, 255); color: rgb(255, 255, 255);">
+                                        <th style="text-align: left; width: 173px;">参数名</th>
+                                        <th style="text-align: left; width: 173px;">必选</th>
+                                        <th style="text-align: left; width: 173px;">类型</th>
+                                        <th style="width: 173px;">说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">lsh</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>商户订单号</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">money</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">numeric</td>
+                                        <td>订单金额，正整数。〔100〕</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">user</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>商户号，由系统方提供。</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">time</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>当前时间，范例格式：2016-03-05 00:21:22</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">type</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>支付类型 〔请参考 [附件] 支付类型〕</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">reurl</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>用户支付成功后跳转页面</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">okreurl</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>服务端异步通知</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">ch</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>验证码由所有参数组成，apikey由系统方提供，ch格式为 ，md5(lsh+money+user+time+type+reurl+okreurl+apikey)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p> <strong>请求示例</strong></p>
+                        <pre class="prettyprint linenums prettyprinted" style="padding-left: 5px; padding-top: 15px; background-color: rgb(252, 252, 252); border: 1px solid rgb(225, 225, 232);"><ol class="linenums" style="padding-left: 5px;"><li class="L0" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pun">{</span><span class="str">"lsh"</span><span class="pun">:</span><span class="str">"test240a"</span><span class="pun">,</span><span class="str">"money"</span><span class="pun">:</span><span class="str">100</span><span class="pun">,</span><span class="str">"user"</span><span class="pun">:</span><span class="str">"fd853c1e-b37c-4249-af2b-e322caaa1ca9"</span><span class="pun">,</span><span class="str">"time"</span><span class="pun">:</span><span class="str">"2020-02-20 11:11:11"</span><span class="pun">,</span><span class="str">"type"</span><span class="pun">:</span><span class="str">"5"</span><span class="pun">,</span><span class="str">"reurl"</span><span class="pun">:</span><span class="str">"https://xintdpay.com"</span><span class="pun">,</span><span class="str">"okreurl"</span><span class="pun">:</span><span class="str">"https://xintdpay.com"</span><span class="pun">,</span><span class="str">"ch"</span><span class="pun">:</span><span class="str">"6e8c6aa1223d83a685bd370c1c0c548e"</span><span class="pun">}</span></code></li></ol></pre>
+                        <p><strong>返回参数说明</strong></p>
+                        <div style="width: 100%;overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr style="background-color: rgb(64, 158, 255); color: rgb(255, 255, 255);">
+                                        <th style="text-align: left; width: 173px;">参数名</th>
+                                        <th style="text-align: left; width: 173px;">必选</th>
+                                        <th style="text-align: left; width: 173px;">类型</th>
+                                        <th style="width: 173px;">说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">status</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>请求状态，0为成功 1为失败</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">url</td>
+                                        <td style="text-align:left;">否</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>付款连结</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">msg</td>
+                                        <td style="text-align:left;">否</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>错误讯息</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p> <strong>返回成功示例</strong></p>
+                        <pre class="prettyprint linenums prettyprinted" style="padding-left: 5px; padding-top: 15px;  background-color: rgb(252, 252, 252); border: 1px solid rgb(225, 225, 232);"><ol class="linenums" style="padding-left: 5px;"><li class="L0" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="pun">{</span></code></li><li class="L1" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"status"</span><span class="pun">:</span><span class="str">"0"</span><span class="pun">,</span></code></li><li class="L2" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"url"</span><span class="pun">:</span><span class="str">"https://www.richpay168.com/pay?orderTrackingNumber=393ec786-04a1-42f6-b3f1-52f95f6a75b4"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pun">}</span></code></li></ol></pre>
+                        <p> <strong>返回失败示例</strong></p>
+                        <pre class="prettyprint linenums prettyprinted" style="padding-left: 5px; padding-top: 15px;  background-color: rgb(252, 252, 252); border: 1px solid rgb(225, 225, 232);"><ol class="linenums" style="padding-left: 5px;"><li class="L0" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="pun">{</span></code></li><li class="L1" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"status"</span><span class="pun">:</span><span class="str">"1"</span><span class="pun">,</span></code></li><li class="L2" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"msg"</span><span class="pun">:</span><span class="str">"商户已被停用"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pun">}</span></code></li></ol></pre>
+                    </div>
+                </div>
+                <div class="tab-pane" id="kt_portlet_tab_1_2">
+                    <div data-v-bd24ed88="" data-v-d6b14fc8="" id="editor-md" class="main-editor markdown-body editormd-html-preview">
+                        <!---->
+                        <p><strong>简要描述：</strong> </p>
+                        <ul>
+                            <li>查询订单接口</li>
+                        </ul>
+                        <p><strong>请求URL：</strong> </p>
+                        <ul>
+                            <li><code style="color: rgb(221, 17, 68);">https://www.richpay168.com/api/order/status</code></li>
+                        </ul>
+                        <p><strong>请求方式：</strong></p>
+                        <ul>
+                            <li>POST </li>
+                        </ul>
+
+
+                        <p><strong>数据内容：</strong> </p>
+                        <div style="width: 100%;overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr style="background-color: rgb(64, 158, 255); color: rgb(255, 255, 255);">
+                                        <th style="text-align: left; width: 173px;">参数名</th>
+                                        <th style="text-align: left; width: 173px;">必选</th>
+                                        <th style="text-align: left; width: 173px;">类型</th>
+                                        <th style="width: 173px;">说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">lsh</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>商户订单号</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">time</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>当前时间，范例格式：2016-03-05 00:21:22</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">user</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>商户号，由系统方提供。</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">ch</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>验证码由所有参数组成，apikey由系统方提供，ch格式：md5(lsh+time+user+apikey)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p> <strong>请求示例</strong></p>
+                        <pre class="prettyprint linenums prettyprinted" style="padding-left: 5px;padding-top: 10px; background-color: rgb(252, 252, 252); border: 1px solid rgb(225, 225, 232);"><ol class="linenums" style="padding-left: 5px;"><li class="L0" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="str">{"lsh"</span><span class="pun">:</span><span class="str">"test4153423a"</span><span class="pun">,</span><span class="str">"user"</span><span class="pun">:</span><span class="str">"00fdcd2d-4850-478e-924e-2054e5177cfe"</span><span class="pun">,</span><span class="str">"time"</span><span class="pun">:</span><span class="str">"2019-09-08 12:09:41"</span><span class="pun">,</span><span class="str">"ch"</span><span class="pun">:</span><span class="str">"5a820cc1475d7f958f362eeb20450a3e"</span><span class="pun">}</span></code></li></ol></pre>
+                        <p> <strong>返回参数说明：</strong></p>
+                        <div style="width: 100%;overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr style="background-color: rgb(64, 158, 255); color: rgb(255, 255, 255);">
+                                        <th style="text-align: left; width: 173px;">参数名</th>
+                                        <th style="text-align: left; width: 173px;">必选</th>
+                                        <th style="text-align: left; width: 173px;">类型</th>
+                                        <th style="width: 173px;">说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">status</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>请求状态，0成功 1失败</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">tdstud</td>
+                                        <td style="text-align:left;">否</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>订单状态，0支付中 1失败 2成功</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">money</td>
+                                        <td style="text-align:left;">否</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>订单金额，正整数字串。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p> <strong>返回成功示例</strong></p>
+                        <pre class="prettyprint linenums prettyprinted" style="padding-left: 5px; padding-top: 10px; background-color: rgb(252, 252, 252); border: 1px solid rgb(225, 225, 232);"><ol class="linenums" style="padding-left: 5px;"><li class="L0" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="pun">{</span></code></li><li class="L1" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"status"</span><span class="pun">:</span><span class="str">"0"</span><span class="pun">,</span></code></li><li class="L2" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"tdstud"</span><span class="pun">:</span><span class="str">"1"</span><span class="pun">,</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"money"</span><span class="pun">:</span><span class="str">"100"</span></code></li><li class="L4" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pun">}</span></code></li></ol></pre>
+                        <p> <strong>返回失败示例</strong></p>
+                        <pre class="prettyprint linenums prettyprinted" style="padding-left: 5px; padding-top: 10px; background-color: rgb(252, 252, 252); border: 1px solid rgb(225, 225, 232);"><ol class="linenums" style="padding-left: 5px;"><li class="L0" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="pun">{</span></code></li><li class="L1" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"status"</span><span class="pun">:</span><span class="str">"1"</span><span class="pun">,</span></code></li><li class="L2" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln">    </span><span class="str">"msg"</span><span class="pun">:</span><span class="str">"没有此订单"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pun">}</span></code></li></ol></pre>
+                    </div>
+                </div>
+                <div class="tab-pane" id="kt_portlet_tab_1_3">
+                    <div data-v-bd24ed88="" data-v-d6b14fc8="" id="editor-md" class="main-editor markdown-body editormd-html-preview">
+                        <!---->
+                        <p><strong>简要描述：</strong> </p>
+                        <ul>
+                            <li>订单支付成功通知</li>
+                        </ul>
+                        <p><strong>请求URL：</strong> </p>
+                        <ul>
+                            <li><code style="color: rgb(221, 17, 68);">okreurl</code></li>
+                        </ul>
+                        <p><strong>请求方式：</strong></p>
+                        <ul>
+                            <li>POST </li>
+                        </ul>
+                        <p><strong>数据内容：</strong> </p>
+                        <div style="width: 100%;overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr style="background-color: rgb(64, 158, 255); color: rgb(255, 255, 255);">
+                                        <th style="text-align: left; width: 173px;">参数名</th>
+                                        <th style="text-align: left; width: 173px;">必选</th>
+                                        <th style="text-align: left; width: 173px;">类型</th>
+                                        <th style="width: 173px;">说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">id</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>平台订单号</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">lsh</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>商户订单号</td>
+                                    </tr>
+
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">user</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>商户号，由系统方提供。</td>
+                                    </tr>
+
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">optime</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>订单建立时间，由系统方提供。</td>
+                                    </tr>
+
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">paytime</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>订单支付时间，由系统方提供。</td>
+                                    </tr>
+
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">money</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>订单金额，精准到分。</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">tdstud</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>订单状态，0支付中 1失败 2成功</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">ch</td>
+                                        <td style="text-align:left;">是</td>
+                                        <td style="text-align:left;">string</td>
+                                        <td>验证码由所有参数组成，apikey由系统方提供，ch格式为 ，md5(id+lsh+money+tdstud+optime+paytime+apikey)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p> <strong>返回示例</strong></p>
+<pre class="prettyprint linenums prettyprinted" style="        padding-left: 5px;
+        padding-top: 10px;
+        background-color: rgb(252, 252, 252);
+        border: 1px solid rgb(225, 225, 232);"><ol class="linenums" style="padding-left: 5px;"><li class="L0" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="pun">{</span></code></li><li class="L1" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"id"</span><span class="pun">:</span><span class="str">"b6cb767b-0efd-4ffa-aa7f-771b3d9"</span><span class="pun">,</span></code></li><li class="L2" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"lsh"</span><span class="pun">:</span><span class="str">"test168a"</span><span class="pun">,</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"user"</span><span class="pun">:</span><span class="str">"fd853c1e-b37c-4249-af2b-e322caaa1ca9"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"optime"</span><span class="pun">:</span><span class="str">"2020/02/09 14:54:35"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"paytime"</span><span class="pun">:</span><span class="str">"2020/02/09 14:54:54"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"money"</span><span class="pun">:</span><span class="str">"100"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"tdstud"</span><span class="pun">:</span><span class="str">"2"</span></code></li><li class="L3" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pln"></span><span class="str">"ch"</span><span class="pun">:</span><span class="str">"242fe10b3c979c3b1a20807d34183dc4"</span></code></li><li class="L4" style="list-style-type: none; background-color: rgb(252, 252, 252);"><code style="color: rgb(221, 17, 68);"><span class="pun">}</span></code></li></ol></pre>
+                    </div>
+                </div>
+                <div class="tab-pane" id="kt_portlet_tab_1_4">
+                    <div data-v-bd24ed88="" data-v-d6b14fc8="" id="editor-md" class="main-editor markdown-body editormd-html-preview">
+                        <!---->
+                        <ul>
+                            <li>支付类型</li>
+                        </ul>
+                        <div style="width: 100%;overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr style="background-color: rgb(64, 158, 255); color: rgb(255, 255, 255);">
+                                        <th style="text-align: left; width: 359px;">名称</th>
+                                        <th style="width: 359px;">type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">微信个码</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">微信原生</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">支付宝个码</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">支付宝原生</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">支付宝转账</td>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">支付宝转银</td>
+                                        <td>6</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">支付宝红包</td>
+                                        <td>7</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(255, 255, 255);">
+                                        <td style="text-align:left;">口令红包</td>
+                                        <td>8</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#22b9ff",
+                    "light": "#ffffff",
+                    "dark": "#282a3c",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995"
+                },
+                "base": {
+                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+                }
+            }
+        };
+    </script>
+    <script src="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+    <script src="~/lib/metronic/dist/assets/js/scripts.bundle.js" type="text/javascript"></script>
+</body>
+</html>

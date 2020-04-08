@@ -1,0 +1,71 @@
+{{- $name := include "sql-data.fullname" . -}}
+{{- $cfgname := printf "%s-%s" "cfg" $name -}}
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "sql-data.fullname" . }}
+  labels:
+    app: {{ template "sql-data.name" . }}
+    chart: {{ template "sql-data.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: {{ template "sql-data.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "sql-data.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_PID
+            value: {{ .Values.inf.sql.common.pid }}
+          - name: MSSQL_SA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "sql-data.name" . }}
+                key: mysqldb-password
+          ports:
+            - name: http
+              containerPort: 1433
+              protocol: TCP
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+          - name: data
+            mountPath: /var/opt/mssql
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      volumes:
+        - name: data
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.claimRefName | default (include "sql-data.fullname" .) }}
+        {{- else }}
+          emptyDir: {}
+        {{- end -}}

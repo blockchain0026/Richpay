@@ -1,0 +1,35 @@
+﻿<div id="modal__create_deposit_bank_account" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">添加收款账户</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_create_deposit_bank_account" asp-controller="Deposit" asp-action="CreateDepositBankAccount" class="kt-form" method="post">
+                    <div class="form-group">
+                        <label for="bankName" class="form-control-label">命名 :</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="bankName" class="form-control-label">银行名称 :</label>
+                        <input type="text" class="form-control" id="bankName" name="bankname">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountName" class="form-control-label">户名 :</label>
+                        <input type="text" class="form-control" id="accountName" name="accountName">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountNumber" class="form-control-label">银行账号 :</label>
+                        <input type="text" class="form-control" id="accountNumber" name="accountNumber">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

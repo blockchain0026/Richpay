@@ -1,0 +1,228 @@
+﻿@model WebMVC.ViewModels.SystemConfigurationViewModels.WithdrawalAndDepositViewModel
+
+@{
+    ViewData["Title"] = "WithdrawalAndDeposit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+    <!-- begin:: Content Head -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    提现和入金
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <div class="kt-subheader__group" id="kt_subheader_search">
+                    <span class="kt-subheader__desc" id="kt_subheader_total">
+                        提现和入金相关设置
+                    </span>
+                </div>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <a href="#" class="btn btn-default btn-bold" onclick="ReturnPreviousPage()">
+                    返回
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- end:: Content Head -->
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+        <!--Begin:: Portlet-->
+        <div class="kt-portlet kt-portlet--tabs">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-toolbar">
+                    <ul class="nav nav-tabs nav-tabs-space-lg nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#kt_apps_contacts_view_tab_2" role="tab">
+                                <i class="flaticon2-calendar-3"></i>提现和入金
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="tab-content  kt-margin-t-20">
+
+                    <!--Begin:: Tab Content-->
+                    <div class="tab-pane active" id="kt_apps_contacts_view_tab_2" role="tabpanel">
+                        <form asp-controller="SystemConfiguration" asp-action="WithdrawalAndDeposit" id="kt_system_withdrawalanddeposit_form" class="kt-form kt-form--label-right" method="post">
+                            <div class="kt-form__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                        <div class="row">
+                                            <label class="col-xl-3"></label>
+                                            <div class="col-lg-9 col-xl-6">
+                                                <h3 class="kt-section__title kt-section__title-sm">
+                                                    提现模板
+                                                    <i class="flaticon2-information" data-toggle="kt-tooltip" data-placement="right" title="提现模版将作为添加用户时预设的提现配置"></i>
+                                                    :
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">单笔限额</label>
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend"><span class="input-group-text">最低</span></div>
+                                                    <input id="each-amount-lower-limit" asp-for="EachAmountLowerLimit" class="form-control" type="text" value="@Model.EachAmountLowerLimit" name="eachamountlowerlimit">
+                                                    <div class="input-group-append"><span class="input-group-text">¥</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label"></label>
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend"><span class="input-group-text">最高</span></div>
+                                                    <input id="each-amount-upper-limit" asp-for="EachAmountUpperLimit" class="form-control" type="text" value="@Model.EachAmountUpperLimit" name="eachamountupperlimit">
+                                                    <div class="input-group-append"><span class="input-group-text">¥</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">单日限额</label>
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend"><span class="input-group-text">最高</span></div>
+                                                    <input asp-for="DailyAmountLimit" class="form-control" type="text" value="@Model.DailyAmountLimit" name="dailyamountlimit">
+                                                    <div class="input-group-append"><span class="input-group-text">¥</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">单日次数</label>
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend"><span class="input-group-text">最高</span></div>
+                                                    <input asp-for="DailyFrequencyLimit" class="form-control" type="text" value="@Model.DailyFrequencyLimit" name="dailyfrequencylimit">
+                                                    <div class="input-group-append"><span class="input-group-text">次</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">提现手续费</label>
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend"><span class="input-group-text">千分之</span></div>
+                                                    <input asp-for="CommissionInThousandth" class="form-control" type="text" value="@Model.CommissionInThousandth" name="commissioninthousandth">
+                                                    <div class="input-group-append"><span class="input-group-text"> 每笔</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-xl-3"></label>
+                                            <div class="col-lg-9 col-xl-6">
+                                                <h3 class="kt-section__title kt-section__title-sm">
+                                                    提现开放时间
+                                                    <i class="flaticon2-information" data-toggle="kt-tooltip" data-placement="right" title="用户将无法在开放时间外申请提现"></i>
+                                                    :
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">开始</label>
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                <div class="input-group">
+                                                    <select asp-for="WithdrawalOpenFromInHour" asp-items="@Model.WithdrawalOpenFromInHours" name="withdrawalopenfrominhour" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                    </select>
+                                                    <div class="input-group-append"><span class="input-group-text">点</span></div>&emsp;&emsp;
+
+                                                    <select asp-for="WithdrawalOpenFromInMinute" asp-items="@Model.WithdrawalOpenFromInMinutes" name="withdrawalopenfrominminute" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                    </select>
+                                                    <div class="input-group-append"><span class="input-group-text">分</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">结束</label>
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                <div class="input-group">
+                                                    <select asp-for="WithdrawalOpenToInHour" asp-items="@Model.WithdrawalOpenToInHours" name="withdrawalopentoinhour" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                    </select>
+                                                    <div class="input-group-append"><span class="input-group-text">点</span></div>&emsp;&emsp;
+
+                                                    <select asp-for="WithdrawalOpenToInMinute" asp-items="@Model.WithdrawalOpenToInMinutes" name="withdrawalopentoinminute" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                    </select>
+                                                    <div class="input-group-append"><span class="input-group-text">分</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-xl-3"></label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <h3 class="kt-section__title kt-section__title-sm">
+                                                入金开放时间
+                                                <i class="flaticon2-information" data-toggle="kt-tooltip" data-placement="right" title="用户将无法在开放时间外申请入金"></i>
+                                                :
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">开始</label>
+                                        <div class="col-sm-3 col-sm-offset-3">
+                                            <div class="input-group">
+                                                <select asp-for="DepositOpenFromInHour" asp-items="@Model.DepositOpenFromInHours" name="depositopenfrominhour" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                </select>
+                                                <div class="input-group-append"><span class="input-group-text">点</span></div>&emsp;&emsp;
+
+                                                <select asp-for="DepositOpenFromInMinute" asp-items="@Model.DepositOpenFromInMinutes" name="depositopenfrominminute" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                </select>
+                                                <div class="input-group-append"><span class="input-group-text">分</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-last row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">结束</label>
+                                        <div class="col-sm-3 col-sm-offset-3">
+                                            <div class="input-group">
+                                                <select asp-for="DepositOpenToInHour" asp-items="@Model.DepositOpenToInHours" name="depositopentoinhour" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                </select>
+                                                <div class="input-group-append"><span class="input-group-text">点</span></div>&emsp;&emsp;
+
+                                                <select asp-for="DepositOpenToInMinute" asp-items="@Model.DepositOpenToInMinutes" name="depositopentoinminute" class="form-control form-control--fixed kt-selectpicker" data-size="6" data-live-search="true">
+                                                </select>
+                                                <div class="input-group-append"><span class="input-group-text">分</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-xl-3"></div>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <a class="btn btn-brand btn-bold text-white" data-ktwizard-type="action-submit">提交</a>
+                                        <a href="#" class="btn btn-clean btn-bold" onclick="ReturnPreviousPage()">取消</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--End:: Tab Content-->
+                </div>
+            </div>
+        </div>
+
+        <!--End:: Portlet-->
+    </div>
+
+    <!-- end:: Content -->
+</div>
+
+
+@section Scripts{
+    <script src="~/js/pages/system-configuration/edit-withdrawalanddeposit.js" type="text/javascript"></script>
+
+    <script src="~/lib/metronic/dist/assets/js/pages/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
+}

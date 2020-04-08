@@ -1,0 +1,94 @@
+﻿@model WebMVC.Models.Queries.Manager
+<tr data-row="0" class="kt-datatable__row" style="left: 0px;">
+    <td class="kt-datatable__cell kt-datatable__toggle-detail">
+        <a class="kt-datatable__toggle-detail" href="https://keenthemes.com/metronic/preview/demo6/custom/apps/user/list-datatable.html">
+            <i class="fa fa-caret-right"></i>
+        </a>
+    </td>
+    <td class="kt-datatable__cell--center kt-datatable__cell kt-datatable__cell--check" data-field="RecordID">
+        <span style="width: 20px;">
+            <label class="kt-checkbox kt-checkbox--single kt-checkbox--solid"><input type="checkbox" value="1">&nbsp;<span></span></label>
+        </span>
+    </td>
+    <td data-field="UserName" class="kt-datatable__cell">
+        <span style="width: 200px;">
+            <div class="kt-user-card-v2">
+                <div class="kt-user-card-v2__pic">
+                    <div class="kt-badge kt-badge--xl kt-badge--primary"> @Model.FullName[0]</div>
+                </div>
+                <div class="kt-user-card-v2__details">
+                    <a class="kt-user-card-v2__name" href="">@Model.FullName</a>
+                    <span class="kt-user-card-v2__desc">@Model.Username</span>
+                </div>
+            </div>
+        </span>
+    </td>
+    <td data-field="Role" class="kt-datatable__cell">
+        <span style="width: 122px;">
+            @Model.RoleName
+        </span>
+    </td>
+    <td data-field="LastLogin" class="kt-datatable__cell">
+        <span style="width: 122px;">
+            <div class="kt-user-card-v2">
+                <div class="kt-user-card-v2__details">
+                    <a class="kt-user-card-v2__desc" href="">@Model.LastLoginIP</a>
+                    <span class="kt-user-card-v2__desc">@Model.DateLastLoggedIn</span>
+                </div>
+            </div>
+        </span>
+    </td>
+    <td data-field="Status" class="kt-datatable__cell">
+        <span style="width: 100px;">
+            @if (Model.IsEnabled)
+            {
+                <span class="btn btn-bold btn-sm btn-font-sm  btn-label-success">
+                    Enabled
+                </span>
+            }
+            else
+            {
+                <span class="btn btn-bold btn-sm btn-font-sm  btn-label-danger">
+                    Disabled
+                </span>
+            }
+        </span>
+    </td>
+    <td data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell">
+        <span style="overflow: visible; position: relative; width: 80px;">
+            <div class="dropdown">
+                <a data-toggle="dropdown" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                    <i class="flaticon-more-1"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <ul class="kt-nav">
+                        <li class="kt-nav__item">
+                            <a class="kt-nav__link" href="#">
+                                <i class="kt-nav__link-icon flaticon2-expand"></i>
+                                <span class="kt-nav__link-text">View</span>
+                            </a>
+                        </li>
+                        <li class="kt-nav__item">
+                            <a asp-controller="Manager" asp-action="Update" asp-route-managerId="@Model.ManagerId" class="kt-nav__link" >
+                                <i class="kt-nav__link-icon flaticon2-contract"></i>
+                                <span class="kt-nav__link-text">Edit</span>
+                            </a>
+                        </li>
+                        <li class="kt-nav__item">
+                            <a class="kt-nav__link" href="https://keenthemes.com/metronic/preview/demo6/custom/apps/user/list-datatable.html#">
+                                <i class="kt-nav__link-icon flaticon2-trash"></i>
+                                <span class="kt-nav__link-text">Delete</span>
+                            </a>
+                        </li>
+                        <li class="kt-nav__item">
+                            <a class="kt-nav__link" href="https://keenthemes.com/metronic/preview/demo6/custom/apps/user/list-datatable.html#">
+                                <i class="kt-nav__link-icon flaticon2-mail-1"></i>
+                                <span class="kt-nav__link-text">Export</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </span>
+    </td>
+</tr>

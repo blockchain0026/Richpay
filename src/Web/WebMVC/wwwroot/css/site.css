@@ -1,0 +1,41 @@
+﻿body {
+}
+
+    body.modal-open {
+        overflow: hidden;
+        position: fixed;
+    }
+
+    body.viewport-lg {
+        position: absolute;
+    }
+
+/* REMOVE SECOND CALENDAR */
+
+.daterangepicker .drp-calendar.right {
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+}
+
+    .daterangepicker .drp-calendar.right tbody {
+        display: none !important;
+    }
+
+    .daterangepicker .drp-calendar.right thead > tr:nth-child(2) {
+        display: none !important;
+    }
+
+    .daterangepicker .drp-calendar.right th.month {
+        display: none !important;
+    }
+
+    .daterangepicker .drp-calendar.right .calendar-table {
+        background: transparent !important;
+    }
+
+.daterangepicker .drp-calendar.right .daterangepicker_input {
+    position: absolute !important;
+}
+
+/* REMOVE SECOND CALENDAR */

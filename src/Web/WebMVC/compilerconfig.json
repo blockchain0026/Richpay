@@ -1,0 +1,26 @@
+﻿[
+  {
+    "outputFile": "wwwroot/lib/metronic/sass/style.css",
+    "inputFile": "wwwroot/lib/metronic/sass/style.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/metronic/sass/pages/login/login-4.css",
+    "inputFile": "wwwroot/lib/metronic/sass/pages/login/login-4.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/metronic/sass/_config.css",
+    "inputFile": "wwwroot/lib/metronic/sass/_config.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/metronic/sass/pages/login/login-3.css",
+    "inputFile": "wwwroot/lib/metronic/sass/pages/login/login-3.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/style.css",
+    "inputFile": "wwwroot/css/style.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/metronic/plugins.bundle.css",
+    "inputFile": "wwwroot/css/metronic/plugins.bundle.scss"
+  }
+]

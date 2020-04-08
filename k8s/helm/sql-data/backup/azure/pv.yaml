@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: azure-disk-pv
+spec:
+  capacity:
+    storage: 2Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  accessModes:
+    - {{ .Values.persistence.accessMode | quote }}
+  azureDisk:
+    kind: Managed
+    diskName: {{ .Values.persistence.diskName | quote }}
+    diskURI:  {{ .Values.persistence.diskURI | quote }}

@@ -1,0 +1,69 @@
+{
+  "SiteBaseInfo": {
+    "SiteTitle": "Richpay",
+    "ContactAddress": "address address address",
+    "ContactEmail": "contact@richpay.com",
+    "ConsumerHotline": "+18123456789",
+    "ConsumerServiceQQ": "contact@qq.com",
+    "ConsumerServiceSkype": "rich123skype321a",
+    "BusinessHoursFrom": "10:05",
+    "BusinessHoursTo": "10:05"
+  },
+  "Payment": {
+    "AlipayPaymentTemplate": {
+      "SecondsBeforePayment": 30,
+      "IsAmountUnchangeable": false,
+      "IsAccountUnchangeable": false,
+      "IsH5RedirectByScanEnabled": true,
+      "IsH5RedirectByClickEnabled": true,
+      "IsH5RedirectByPickingPhotoEnabled": true
+    },
+    "PaymentTimeoutInSecond": 180,
+    "SellRequestCountdownInSecond": 10000
+  },
+  "SystemNotificationSound": {
+    "Withdraw": true,
+    "Deposit": true,
+    "NewOrder": true,
+    "OrderTimeout": false
+  },
+  "UserNotification": {
+    "OrderTimeout": true,
+    "SuccessDeposit": true
+  },
+  "WithdrawalAndDeposit": {
+    "WithdrawalTemplate": {
+      "EachAmountUpperLimit": 5000,
+      "EachAmountLowerLimit": 300,
+      "DailyAmountLimit": 50000,
+      "DailyFrequencyLimit": 5,
+      "CommissionInThousandth": 10
+    },
+    "WithdrawalOpenFrom": "00:00",
+    "WithdrawalOpenTo": "00:00",
+    "DepositOpenFrom": "01:01",
+    "DepositOpenTo": "01:01"
+  },
+  "PaymentChannel": {
+    "OpenFrom": "12:00",
+    "OpenTo": "23:59",
+    "AutoToggle": false
+  },
+  "QrCodeConf": {
+    "RiskControlTemplate": {
+      "AutoPairingBySuccessRate": true,
+      "AutoPairingByQuotaLeft": true,
+      "AutoPairingByBusinessHours": false,
+      "AutoPairingByCurrentConsecutiveFailures": true,
+      "AutoPairngByAvailableBalance": true,
+      "SuccessRateThresholdInHundredth": 50,
+      "SuccessRateMinOrders": 10,
+      "QuotaLeftThreshold": 300,
+      "CurrentConsecutiveFailuresThreshold": 3,
+      "AvailableBalanceThreshold": 100,
+      "DailyAmountLimit": 3,
+      "OrderAmountUpperLimit": 5000,
+      "OrderAmountLowerLimit": 1
+    }
+  }
+}

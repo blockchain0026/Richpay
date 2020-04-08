@@ -1,0 +1,44 @@
+﻿@using WebMVC.Models
+<div id="modal__change_balance" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">变帐</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_change_balance" asp-controller="ShopAgent" asp-action="ChangeBalance" class="kt-form" method="post">
+                    <div class="form-group">
+                        <label for="userId" class="form-control-label">商户代理编号 :</label>
+                        <input type="text" class="form-control" id="userid" name="userid" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentbalance" class="form-control-label">当前可用余额 :</label>
+                        <input type="text" class="form-control" id="currentbalance" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="form-control-label">变帐类型 :</label>
+                        <select class="form-control kt-selectpicker" id="type" name="type">
+                            <option>@BalanceChangeType.Freeze</option>
+                            <option>@BalanceChangeType.Deposit</option>
+                            <option>@BalanceChangeType.Withdraw</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount" class="form-control-label">金额 :</label>
+                        <input type="text" class="form-control" id="amount" name="amount" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="form-control-label">备注 :</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

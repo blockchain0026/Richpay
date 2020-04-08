@@ -1,0 +1,1753 @@
+﻿<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] | Dashboard</title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--begin::Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700|Noto+Sans+SC:300,400,500,600,700">
+    <!--end::Fonts -->
+    <!--begin::Global Theme Styles(used by all pages) -->
+    <link href="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/metronic/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles -->
+
+    <link rel="shortcut icon" href="~/lib/metronic/dist/assets/media/logos/favicon.ico" />
+
+    @if (IsSectionDefined("AddToHead"))
+    {
+        @RenderSection("AddToHead", required: false)
+    }
+</head>
+<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading">
+    <!--<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebMVC</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>-->
+
+    <!-- begin:: Header Mobile -->
+    <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+        <div class="kt-header-mobile__logo">
+            <a href="index.html">
+                <img alt="Logo" src="assets/media/logos/logo-6-sm.png" />
+            </a>
+        </div>
+        <div class="kt-header-mobile__toolbar">
+            <div class="kt-header-mobile__toolbar-toggler kt-header-mobile__toolbar-toggler--left" id="kt_aside_mobile_toggler"><span></span></div>
+            <div class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler"><span></span></div>
+            <div class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></div>
+        </div>
+    </div>
+    <!-- end:: Header Mobile -->
+
+
+    <div class="kt-grid kt-grid--hor kt-grid--root">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+            <!-- begin:: Aside -->
+            <button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+            <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
+
+                <!-- begin:: Aside Menu -->
+                <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
+                    <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
+                        <ul class="kt-menu__nav ">
+                            <li class="kt-menu__item  kt-menu__item--active" aria-haspopup="true"><a href="index.html" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-protection"></i><span class="kt-menu__link-text">仪表板</span></a></li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-list"></i><span class="kt-menu__link-text">订单管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">订单管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">订单总览</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">支付中</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">已超时</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">异常</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-supermarket"></i><span class="kt-menu__link-text">商户管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">商户管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">代理</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">商户</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">子商户</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">API管理</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-group"></i><span class="kt-menu__link-text">代理管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">代理管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">代理列表</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核资料</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-phone"></i><span class="kt-menu__link-text">交易员管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">交易员管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">交易员列表</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核资料</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon"><img src="~/lib/metronic/dist/assets/media/icons/svg/Shopping/Barcode-read.svg" /></i><span class="kt-menu__link-text">二维码管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">二维码管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">二维码列表</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">金额选项</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核资料</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon "><img src="~/lib/metronic/dist/assets/media/icons/svg/Shopping/Money.svg" /></i><span class="kt-menu__link-text">提现管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">提现管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">提现纪录</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">提现模板</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon-coins"></i><span class="kt-menu__link-text">入金管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">入金管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">入金纪录</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">收款帐号</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-rectangular"></i><span class="kt-menu__link-text">公告管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">公告管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">站内消息</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">收款帐号</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-pin"></i><span class="kt-menu__link-text">活动纪录</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">活动纪录</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">审核纪录</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">订单异动</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">登录纪录</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">角色异动</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">管理帐户异动</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-graphic-1"></i><span class="kt-menu__link-text">财务报表</span></a></li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon-users-1"></i><span class="kt-menu__link-text">管理员管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">管理员管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">帐户配置</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">角色配置</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-gear"></i><span class="kt-menu__link-text">系统设置</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">系统设置</span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">基本讯息</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">支付</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">提示音</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">用户通知</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">提现</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">通道</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">GA验证</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">数据清理</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Aside Menu -->
+            </div>
+            <!-- end:: Aside -->
+
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+                <!-- begin:: Header -->
+                <div id="kt_header" class="kt-header kt-grid kt-grid--ver  kt-header--fixed ">
+
+                    <!-- begin:: Aside -->
+                    <div class="kt-header__brand kt-grid__item  " id="kt_header_brand">
+                        <div class="kt-header__brand-logo">
+                            <a href="index.html">
+                                <img alt="Logo" src="assets/media/logos/logo-6.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <!-- end:: Aside -->
+                    <!-- begin:: Title -->
+                    <h3 class="kt-header__title kt-grid__item">
+                        閃付
+                    </h3>
+                    <!-- end:: Title -->
+                    <!-- begin: Header Menu -->
+                    <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+                    <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
+                        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+                            <ul class="kt-menu__nav ">
+                                <li class="kt-menu__item  kt-menu__item--active " aria-haspopup="true"><a href="index.html" class="kt-menu__link "><span class="kt-menu__link-text">仪表板</span></a></li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Components</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-start-up"></i><span class="kt-menu__link-text">Base</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/colors.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">State Colors</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/typography.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Typography</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/buttons.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Buttons</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/button-group.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Button Group</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/dropdown.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Dropdown</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/tabs/bootstrap.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Bootstrap Tabs</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/tabs/line.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Line Tabs</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/accordions.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Accordions</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/tables.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tables</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/progress.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Progress</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/modal.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Modal</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/alerts.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Alerts</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/popover.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Popover</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/base/tooltip.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tooltip</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-photograph"></i><span class="kt-menu__link-text">Custom</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/badge.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Badge</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/navs.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Navigations</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/lists.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lists</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/notes.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Notes</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/timeline.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Timeline</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/media.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Media</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/spinners.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Spinners</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/pagination.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Pagination</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/iconbox.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Iconbox</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/infobox.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Infobox</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/callout.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Callout</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/ribbon.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Ribbon</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/custom/miscellaneous.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Miscellaneous</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-lorry"></i><span class="kt-menu__link-text">Extended</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/kanban-board.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Kanban Board</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/sticky-panels.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sticky Panels</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/blockui.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Block UI</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/perfect-scrollbar.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Perfect Scrollbar</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/treeview.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tree View</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/bootstrap-notify.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Bootstrap Notify</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/toastr.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Toastr</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/sweetalert2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">SweetAlert2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/extended/dual-listbox.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Dual Listbox</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-cube-1"></i><span class="kt-menu__link-text">Icons</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/icons/flaticon.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Flaticon</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/icons/fontawesome5.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Fontawesome 5</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/icons/lineawesome.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lineawesome</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/icons/socicons.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Socicons</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/icons/svg.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">SVG Icons</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-browser-1"></i><span class="kt-menu__link-text">Portlets</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/portlets/base.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Base Portlets</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/portlets/advanced.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Advanced Portlets</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/portlets/tabbed.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tabbed Portlets</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/portlets/draggable.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Draggable Portlets</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/portlets/tools.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Portlet Tools</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/portlets/sticky-head.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sticky Head</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-pie-chart-4"></i><span class="kt-menu__link-text">Widgets</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/widgets/lists.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lists</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/widgets/charts.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Charts</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/widgets/general.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">General</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-calendar-2"></i><span class="kt-menu__link-text">Calendar</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/calendar/basic.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Basic Calendar</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/calendar/list-view.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Views</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/calendar/google.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Google Calendar</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/calendar/external-events.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">External Events</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/calendar/background-events.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Background Events</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-graph-1"></i><span class="kt-menu__link-text">Charts</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">amCharts</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="components/charts/amcharts/charts.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">amCharts Charts</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="components/charts/amcharts/stock-charts.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">amCharts Stock Charts</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="components/charts/amcharts/maps.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">amCharts Maps</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/charts/flotcharts.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Flot Charts</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/charts/google-charts.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Google Charts</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/charts/morris-charts.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Morris Charts</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-location"></i><span class="kt-menu__link-text">Maps</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/maps/google-maps.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Google Maps</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/maps/jqvmap.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">JQVMap</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-cube-1"></i><span class="kt-menu__link-text">Utils</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/utils/session-timeout.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Session Timeout</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="components/utils/idle-timer.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Idle Timer</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Crud</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-architecture-and-city"></i><span class="kt-menu__link-text">Forms & Controls</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Controls</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/controls/base.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Base Inputs</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/controls/input-group.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Input Groups</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/controls/checkbox.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Checkbox</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/controls/radio.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Radio</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/controls/switch.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Switch</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/controls/option.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Mega Options</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Widgets</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-datepicker.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Datepicker</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-datetimepicker.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Datetimepicker</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-timepicker.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Timepicker</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-daterangepicker.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Daterangepicker</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/tagify.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tagify</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-touchspin.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Touchspin</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-maxlength.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Maxlength</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-switch.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Switch</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-multipleselectsplitter.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Multiple Select Splitter</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/bootstrap-select.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Bootstrap Select</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/select2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Select2</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/typeahead.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Typeahead</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Widgets 2</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/nouislider.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">noUiSlider</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/form-repeater.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Repeater</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/ion-range-slider.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Ion Range Slider</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/input-mask.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Input Masks</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/autosize.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Autosize</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/clipboard.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Clipboard</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/widgets/recaptcha.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Google reCaptcha</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Text Editors</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/tinymce.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">TinyMCE</span></a></li>
+                                                                    <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                                        <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">CKEditor</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                                        <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                            <ul class="kt-menu__subnav">
+                                                                                <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/ckeditor-classic.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">CKEditor Classic</span></a></li>
+                                                                                <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/ckeditor-inline.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">CKEditor Inline</span></a></li>
+                                                                                <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/ckeditor-balloon.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">CKEditor Balloon</span></a></li>
+                                                                                <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/ckeditor-balloon-block.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">CKEditor Balloon Block</span></a></li>
+                                                                                <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/ckeditor-document.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">CKEditor Document</span></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/quill.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Quill Text Editor</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/summernote.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Summernote WYSIWYG</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/editors/bootstrap-markdown.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Markdown Editor</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Layouts</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/layouts/default-forms.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Default Forms</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/layouts/multi-column-forms.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Multi Column Forms</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/layouts/action-bars.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Basic Action Bars</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/layouts/sticky-action-bar.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sticky Action Bar</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Validation</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/validation/states.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Validation States</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/validation/form-controls.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Controls</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/forms/validation/form-widgets.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Form Widgets</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-browser-2"></i><span class="kt-menu__link-text">KTDatatable</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Base</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/base/data-local.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Local Data</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/base/data-json.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">JSON Data</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/base/data-ajax.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Ajax Data</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/base/html-table.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">HTML Table</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/base/local-sort.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Local Sort</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/base/translation.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Translation</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Advanced</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/advanced/record-selection.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Record Selection</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/advanced/row-details.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Row Details</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/advanced/modal.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Modal Examples</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/advanced/column-rendering.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Column Rendering</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/advanced/column-width.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Column Width</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/advanced/vertical.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Vertical Scrolling</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/advanced/horizontal.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Horizontal Scrolling</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Child Datatables</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/child/data-local.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Local Data</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/child/data-ajax.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Remote Data</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">API</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/api/methods.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">API Methods</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/metronic-datatable/api/events.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Events</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-list-3"></i><span class="kt-menu__link-text">Datatables.net</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Basic</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/basic/basic.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Basic Tables</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/basic/scrollable.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Scrollable Tables</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/basic/headers.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Complex Headers</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/basic/paginations.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Pagination Options</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Advanced</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/advanced/column-rendering.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Column Rendering</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/advanced/multiple-controls.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Multiple Controls</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/advanced/column-visibility.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Column Visibility</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/advanced/row-callback.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Row Callback</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/advanced/row-grouping.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Row Grouping</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/advanced/footer-callback.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Footer Callback</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Data sources</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/data-sources/html.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">HTML</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/data-sources/javascript.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Javascript</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/data-sources/ajax-client-side.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Ajax Client-side</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/data-sources/ajax-server-side.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Ajax Server-side</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Search Options</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/search-options/column-search.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Column Search</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/search-options/advanced-search.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Advanced Search</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Extensions</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/buttons.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Buttons</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/colreorder.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">ColReorder</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/keytable.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">KeyTable</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/responsive.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Responsive</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/rowgroup.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">RowGroup</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/rowreorder.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">RowReorder</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/scroller.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Scroller</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="crud/datatables/extensions/select.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Select</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-list-3"></i><span class="kt-menu__link-text">File Upload</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="crud/file-upload/metronic-avatar.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Metronic Avatar</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="crud/file-upload/dropzonejs.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">DropzoneJS</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="crud/file-upload/uppy.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Uppy</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Apps</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-cube-1"></i><span class="kt-menu__link-text">Users</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/list-default.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Default</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/list-datatable.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Datatable</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/list-columns-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Columns 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/list-columns-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Columns 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/add-user.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Add User</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/edit-user.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Edit User</span></a></li>
+                                                        <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Profile 1</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                            <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                                <ul class="kt-menu__subnav">
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-1/overview.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Overview</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-1/personal-information.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Personal Information</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-1/account-information.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Account Information</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-1/change-password.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Change Password</span></a></li>
+                                                                    <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-1/email-settings.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Email Settings</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Profile 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-3.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Profile 3</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/user/profile-4.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Profile 4</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-writing"></i><span class="kt-menu__link-text">Contacts</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/contacts/list-columns.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Columns</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/contacts/list-datatable.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Datatable</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/contacts/view-contact.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">View Contact</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/contacts/add-contact.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Add Contact</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/contacts/edit-cotact.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Edit Contact</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-writing"></i><span class="kt-menu__link-text">Chat</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/chat/private.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Private</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/chat/group.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Group</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/chat/popup.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Popup</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-telegram-logo"></i><span class="kt-menu__link-text">Projects</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/list-columns-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Columns 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/list-columns-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Columns 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/list-columns-3.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Columns 3</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/list-columns-4.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Columns 4</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/list-datatable.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List - Datatable</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/view-project.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">View Project</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/add-project.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Add Project</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/projects/edit-project.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Edit Project</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-rocket"></i><span class="kt-menu__link-text">Support Center</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/support-center/home-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Home 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/support-center/home-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Home 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/support-center/faq-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">FAQ 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/support-center/faq-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">FAQ 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/support-center/faq-3.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">FAQ 3</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/support-center/feedback.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Feedback</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/support-center/license.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">License</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-indent-dots"></i><span class="kt-menu__link-text">Todo</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/todo/tasks.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tasks</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/todo/docs.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Docs</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/todo/files.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Files</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/inbox.html" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-rocket"></i><span class="kt-menu__link-text">Inbox</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--danger kt-badge--inline">new</span></span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Pages</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu  kt-menu__submenu--fixed kt-menu__submenu--center" style="width:1000px">
+                                        <div class="kt-menu__subnav">
+                                            <ul class="kt-menu__content">
+                                                <li class="kt-menu__item ">
+                                                    <h3 class="kt-menu__heading kt-menu__toggle"><span class="kt-menu__link-text">Pricing Tables</span><i class="kt-menu__ver-arrow la la-angle-right"></i></h3>
+                                                    <ul class="kt-menu__inner">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/pricing/pricing-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Pricing Tables 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/pricing/pricing-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Pricing Tables 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/pricing/pricing-3.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Pricing Tables 3</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/pricing/pricing-4.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Pricing Tables 4</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="kt-menu__item ">
+                                                    <h3 class="kt-menu__heading kt-menu__toggle"><span class="kt-menu__link-text">Wizards</span><i class="kt-menu__ver-arrow la la-angle-right"></i></h3>
+                                                    <ul class="kt-menu__inner">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/wizard/wizard-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Wizard 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/wizard/wizard-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Wizard 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/wizard/wizard-3.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Wizard 3</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/wizard/wizard-4.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Wizard 4</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="kt-menu__item ">
+                                                    <h3 class="kt-menu__heading kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Invoices & FAQ</span><i class="kt-menu__ver-arrow la la-angle-right"></i></h3>
+                                                    <ul class="kt-menu__inner">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/invoices/invoice-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Invoice 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/invoices/invoice-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Invoice 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/faq/faq-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">FAQ 1</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="kt-menu__item ">
+                                                    <h3 class="kt-menu__heading kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">User Pages</span><i class="kt-menu__ver-arrow la la-angle-right"></i></h3>
+                                                    <ul class="kt-menu__inner">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/user/login-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Login 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/user/login-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Login 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/user/login-3.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Login 3</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/user/login-4.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Login 4</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/user/login-5.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Login 5</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/user/login-6.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Login 6</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="kt-menu__item ">
+                                                    <h3 class="kt-menu__heading kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Error Pages</span><i class="kt-menu__ver-arrow la la-angle-right"></i></h3>
+                                                    <ul class="kt-menu__inner">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/error/error-1.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Error 1</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/error/error-2.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Error 2</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/error/error-3.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Error 3</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/error/error-4.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Error 4</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/error/error-5.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Error 5</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a href="custom/pages/error/error-6.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Error 6</span></a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end: Header Menu -->
+
+                    <!-- begin:: Header Topbar -->
+                    <partial name="_LoginPartial" />
+                    <!-- end:: Header Topbar -->
+                </div>
+                <!-- end:: Header -->
+
+                @RenderBody()
+
+                <!-- begin:: Footer -->
+                <div class="kt-footer  kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
+                    <div class="kt-container  kt-container--fluid ">
+                        <div class="kt-footer__copyright">
+                            &copy; 2019 - Richpay - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="kt-link">Privacy</a>
+                        </div>
+                        <div class="kt-footer__menu">
+                            <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">About</a>
+                            <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Team</a>
+                            <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Contact</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end:: Footer -->
+            </div>
+        </div>
+    </div>
+
+    <!-- begin::Quick Panel -->
+    <div id="kt_quick_panel" class="kt-quick-panel">
+        <a href="#" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i class="flaticon2-delete"></i></a>
+        <div class="kt-quick-panel__nav">
+            <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand  kt-notification-item-padding-x" role="tablist">
+                <li class="nav-item active">
+                    <a class="nav-link active" data-toggle="tab" href="#kt_quick_panel_tab_notifications" role="tab">Notifications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_tab_logs" role="tab">Audit Logs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_tab_settings" role="tab">Settings</a>
+                </li>
+            </ul>
+        </div>
+        <div class="kt-quick-panel__content">
+            <div class="tab-content">
+                <div class="tab-pane fade show kt-scroll active" id="kt_quick_panel_tab_notifications" role="tabpanel">
+                    <div class="kt-notification">
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-line-chart kt-font-success"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New order has been received
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    2 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-box-1 kt-font-brand"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New customer is registered
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    3 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-chart2 kt-font-danger"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    Application has been approved
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    3 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-image-file kt-font-warning"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New file has been uploaded
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    5 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-drop kt-font-info"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New user feedback received
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    8 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-pie-chart-2 kt-font-success"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    System reboot has been successfully completed
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    12 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-favourite kt-font-danger"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New order has been placed
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    15 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item kt-notification__item--read">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-safe kt-font-primary"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    Company meeting canceled
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    19 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-psd kt-font-success"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New report has been received
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    23 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon-download-1 kt-font-danger"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    Finance report has been generated
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    25 hrs ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon-security kt-font-warning"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New customer comment recieved
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    2 days ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification__item">
+                            <div class="kt-notification__item-icon">
+                                <i class="flaticon2-pie-chart kt-font-warning"></i>
+                            </div>
+                            <div class="kt-notification__item-details">
+                                <div class="kt-notification__item-title">
+                                    New customer is registered
+                                </div>
+                                <div class="kt-notification__item-time">
+                                    3 days ago
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="tab-pane fade kt-scroll" id="kt_quick_panel_tab_logs" role="tabpanel">
+                    <div class="kt-notification-v2">
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon-bell kt-font-brand"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    5 new user generated report
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    Reports based on sales
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon2-box kt-font-danger"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    2 new items submited
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    by Grog John
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon-psd kt-font-brand"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    79 PSD files generated
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    Reports based on sales
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon2-supermarket kt-font-warning"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    $2900 worth producucts sold
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    Total 234 items
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon-paper-plane-1 kt-font-success"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    4.5h-avarage response time
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    Fostest is Barry
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon2-information kt-font-danger"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    Database server is down
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    10 mins ago
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon2-mail-1 kt-font-brand"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    System report has been generated
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    Fostest is Barry
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="kt-notification-v2__item">
+                            <div class="kt-notification-v2__item-icon">
+                                <i class="flaticon2-hangouts-logo kt-font-warning"></i>
+                            </div>
+                            <div class="kt-notification-v2__itek-wrapper">
+                                <div class="kt-notification-v2__item-title">
+                                    4.5h-avarage response time
+                                </div>
+                                <div class="kt-notification-v2__item-desc">
+                                    Fostest is Barry
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="tab-pane kt-quick-panel__content-padding-x fade kt-scroll" id="kt_quick_panel_tab_settings" role="tabpanel">
+                    <form class="kt-form">
+                        <div class="kt-heading kt-heading--sm kt-heading--space-sm">Customer Care</div>
+                        <div class="form-group form-group-xs row">
+                            <label class="col-8 col-form-label">Enable Notifications:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--success kt-switch--sm">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="quick_panel_notifications_1">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-xs row">
+                            <label class="col-8 col-form-label">Enable Case Tracking:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--success kt-switch--sm">
+                                    <label>
+                                        <input type="checkbox" name="quick_panel_notifications_2">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-last form-group-xs row">
+                            <label class="col-8 col-form-label">Support Portal:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--success kt-switch--sm">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="quick_panel_notifications_2">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kt-separator kt-separator--space-md kt-separator--border-dashed"></div>
+                        <div class="kt-heading kt-heading--sm kt-heading--space-sm">Reports</div>
+                        <div class="form-group form-group-xs row">
+                            <label class="col-8 col-form-label">Generate Reports:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--sm kt-switch--danger">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="quick_panel_notifications_3">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-xs row">
+                            <label class="col-8 col-form-label">Enable Report Export:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--sm kt-switch--danger">
+                                    <label>
+                                        <input type="checkbox" name="quick_panel_notifications_3">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-last form-group-xs row">
+                            <label class="col-8 col-form-label">Allow Data Collection:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--sm kt-switch--danger">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="quick_panel_notifications_4">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kt-separator kt-separator--space-md kt-separator--border-dashed"></div>
+                        <div class="kt-heading kt-heading--sm kt-heading--space-sm">Memebers</div>
+                        <div class="form-group form-group-xs row">
+                            <label class="col-8 col-form-label">Enable Member singup:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--sm kt-switch--brand">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="quick_panel_notifications_5">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-xs row">
+                            <label class="col-8 col-form-label">Allow User Feedbacks:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--sm kt-switch--brand">
+                                    <label>
+                                        <input type="checkbox" name="quick_panel_notifications_5">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-last form-group-xs row">
+                            <label class="col-8 col-form-label">Enable Customer Portal:</label>
+                            <div class="col-4 kt-align-right">
+                                <span class="kt-switch kt-switch--sm kt-switch--brand">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="quick_panel_notifications_6">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end::Quick Panel -->
+    <!-- begin::Scrolltop -->
+    <div id="kt_scrolltop" class="kt-scrolltop">
+        <i class="fa fa-arrow-up"></i>
+    </div>
+
+    <!-- end::Scrolltop -->
+    <!-- begin::Sticky Toolbar -->
+    <ul class="kt-sticky-toolbar" style="margin-top: 30px;">
+        <li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success" id="kt_demo_panel_toggle" data-toggle="kt-tooltip" title="Check out more demos" data-placement="right">
+            <a href="#" class=""><i class="flaticon2-drop"></i></a>
+        </li>
+        <li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand" data-toggle="kt-tooltip" title="Layout Builder" data-placement="left">
+            <a href="https://keenthemes.com/metronic/preview/demo6/builder.html" target="_blank"><i class="flaticon2-gear"></i></a>
+        </li>
+        <li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--warning" data-toggle="kt-tooltip" title="Documentation" data-placement="left">
+            <a href="https://keenthemes.com/metronic/?page=docs" target="_blank"><i class="flaticon2-telegram-logo"></i></a>
+        </li>
+        <li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--danger" id="kt_sticky_toolbar_chat_toggler" data-toggle="kt-tooltip" title="Chat Example" data-placement="left">
+            <a href="#" data-toggle="modal" data-target="#kt_chat_modal"><i class="flaticon2-chat-1"></i></a>
+        </li>
+    </ul>
+
+    <!-- end::Sticky Toolbar -->
+    <!-- begin::Demo Panel -->
+    <div id="kt_demo_panel" class="kt-demo-panel">
+        <div class="kt-demo-panel__head">
+            <h3 class="kt-demo-panel__title">
+                Select A Demo
+
+                <!--<small>5</small>-->
+            </h3>
+            <a href="#" class="kt-demo-panel__close" id="kt_demo_panel_close"><i class="flaticon2-delete"></i></a>
+        </div>
+        <div class="kt-demo-panel__body">
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 1
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo1.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo1/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo1/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 2
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo2.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo2/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo2/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 3
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo3.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo3/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo3/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 4
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo4.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo4/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo4/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 5
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo5.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo5/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo5/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item kt-demo-panel__item--active">
+                <div class="kt-demo-panel__item-title">
+                    Demo 6
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo6.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo6/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo6/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 7
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo7.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo7/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo7/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 8
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo8.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo8/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo8/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 9
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo9.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo9/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo9/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 10
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo10.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo10/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo10/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 11
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo11.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo11/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo11/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 12
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo12.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="https://keenthemes.com/metronic/preview/demo12/index.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                        <a href="https://keenthemes.com/metronic/preview/demo12/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 13
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo13.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 14
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo14.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 15
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo15.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 16
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo16.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 17
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo17.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 18
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo18.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 19
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo19.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 20
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo20.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-demo-panel__item ">
+                <div class="kt-demo-panel__item-title">
+                    Demo 21
+                </div>
+                <div class="kt-demo-panel__item-preview">
+                    <img src="assets/media//demos/preview/demo21.jpg" alt="" />
+                    <div class="kt-demo-panel__item-preview-overlay">
+                        <a href="#" class="btn btn-brand btn-elevate disabled">Coming soon</a>
+                    </div>
+                </div>
+            </div>
+            <a href="https://1.envato.market/EA4JP" target="_blank" class="kt-demo-panel__purchase btn btn-brand btn-elevate btn-bold btn-upper">
+                Buy Metronic Now!
+            </a>
+        </div>
+    </div>
+
+    <!-- end::Demo Panel -->
+
+
+    <!--Begin:: Chat-->
+    <div class="modal fade- modal-sticky-bottom-right" id="kt_chat_modal" role="dialog" data-backdrop="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="kt-chat">
+                    <div class="kt-portlet kt-portlet--last">
+                        <div class="kt-portlet__head">
+                            <div class="kt-chat__head ">
+                                <div class="kt-chat__left">
+                                    <div class="kt-chat__label">
+                                        <a href="#" class="kt-chat__title">Jason Muller</a>
+                                        <span class="kt-chat__status">
+                                            <span class="kt-badge kt-badge--dot kt-badge--success"></span> Active
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="kt-chat__right">
+                                    <div class="dropdown dropdown-inline">
+                                        <button type="button" class="btn btn-clean btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="flaticon-more-1"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-md">
+
+                                            <!--begin::Nav-->
+                                            <ul class="kt-nav">
+                                                <li class="kt-nav__head">
+                                                    Messaging
+                                                    <i class="flaticon2-information" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="kt-nav__item">
+                                                    <a href="#" class="kt-nav__link">
+                                                        <i class="kt-nav__link-icon flaticon2-group"></i>
+                                                        <span class="kt-nav__link-text">New Group</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a href="#" class="kt-nav__link">
+                                                        <i class="kt-nav__link-icon flaticon2-open-text-book"></i>
+                                                        <span class="kt-nav__link-text">Contacts</span>
+                                                        <span class="kt-nav__link-badge">
+                                                            <span class="kt-badge kt-badge--brand  kt-badge--rounded-">5</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a href="#" class="kt-nav__link">
+                                                        <i class="kt-nav__link-icon flaticon2-bell-2"></i>
+                                                        <span class="kt-nav__link-text">Calls</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a href="#" class="kt-nav__link">
+                                                        <i class="kt-nav__link-icon flaticon2-dashboard"></i>
+                                                        <span class="kt-nav__link-text">Settings</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a href="#" class="kt-nav__link">
+                                                        <i class="kt-nav__link-icon flaticon2-protected"></i>
+                                                        <span class="kt-nav__link-text">Help</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="kt-nav__foot">
+                                                    <a class="btn btn-label-brand btn-bold btn-sm" href="#">Upgrade plan</a>
+                                                    <a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">Learn more</a>
+                                                </li>
+                                            </ul>
+
+                                            <!--end::Nav-->
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-clean btn-sm btn-icon" data-dismiss="modal">
+                                        <i class="flaticon2-cross"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body">
+                            <div class="kt-scroll kt-scroll--pull" data-height="410" data-mobile-height="225">
+                                <div class="kt-chat__messages kt-chat__messages--solid">
+                                    <div class="kt-chat__message kt-chat__message--success">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/100_12.jpg" alt="image">
+                                            </span>
+                                            <a href="#" class="kt-chat__username">Jason Muller</span></a>
+                                            <span class="kt-chat__datetime">2 Hours</span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            How likely are you to recommend our company<br> to your friends and family?
+                                        </div>
+                                    </div>
+                                    <div class="kt-chat__message kt-chat__message--right kt-chat__message--brand">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-chat__datetime">30 Seconds</span>
+                                            <a href="#" class="kt-chat__username">You</span></a>
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/300_21.jpg" alt="image">
+                                            </span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            Hey there, we’re just writing to let you know that you’ve<br> been subscribed to a repository on GitHub.
+                                        </div>
+                                    </div>
+                                    <div class="kt-chat__message kt-chat__message--success">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/100_12.jpg" alt="image">
+                                            </span>
+                                            <a href="#" class="kt-chat__username">Jason Muller</span></a>
+                                            <span class="kt-chat__datetime">30 Seconds</span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            Ok, Understood!
+                                        </div>
+                                    </div>
+                                    <div class="kt-chat__message kt-chat__message--right kt-chat__message--brand">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-chat__datetime">Just Now</span>
+                                            <a href="#" class="kt-chat__username">You</span></a>
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/300_21.jpg" alt="image">
+                                            </span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            You’ll receive notifications for all issues, pull requests!
+                                        </div>
+                                    </div>
+                                    <div class="kt-chat__message kt-chat__message--success">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/100_12.jpg" alt="image">
+                                            </span>
+                                            <a href="#" class="kt-chat__username">Jason Muller</span></a>
+                                            <span class="kt-chat__datetime">2 Hours</span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            You were automatically <b class="kt-font-brand">subscribed</b> <br>because you’ve been given access to the repository
+                                        </div>
+                                    </div>
+                                    <div class="kt-chat__message kt-chat__message--right kt-chat__message--brand">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-chat__datetime">30 Seconds</span>
+                                            <a href="#" class="kt-chat__username">You</span></a>
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/300_21.jpg" alt="image">
+                                            </span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            You can unwatch this repository immediately <br>by clicking here: <a href="#" class="kt-font-bold kt-link"></a>
+                                        </div>
+                                    </div>
+                                    <div class="kt-chat__message kt-chat__message--success">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/100_12.jpg" alt="image">
+                                            </span>
+                                            <a href="#" class="kt-chat__username">Jason Muller</span></a>
+                                            <span class="kt-chat__datetime">30 Seconds</span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            Discover what students who viewed Learn <br>Figma - UI/UX Design Essential Training also viewed
+                                        </div>
+                                    </div>
+                                    <div class="kt-chat__message kt-chat__message--right kt-chat__message--brand">
+                                        <div class="kt-chat__user">
+                                            <span class="kt-chat__datetime">Just Now</span>
+                                            <a href="#" class="kt-chat__username">You</span></a>
+                                            <span class="kt-media kt-media--circle kt-media--sm">
+                                                <img src="assets/media/users/300_21.jpg" alt="image">
+                                            </span>
+                                        </div>
+                                        <div class="kt-chat__text">
+                                            Most purchased Business courses during this sale!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-chat__input">
+                                <div class="kt-chat__editor">
+                                    <textarea placeholder="Type here..." style="height: 50px"></textarea>
+                                </div>
+                                <div class="kt-chat__toolbar">
+                                    <div class="kt_chat__tools">
+                                        <a href="#"><i class="flaticon2-link"></i></a>
+                                        <a href="#"><i class="flaticon2-photograph"></i></a>
+                                        <a href="#"><i class="flaticon2-photo-camera"></i></a>
+                                    </div>
+                                    <div class="kt_chat__actions">
+                                        <button type="button" class="btn btn-brand btn-md  btn-font-sm btn-upper btn-bold kt-chat__reply">reply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ENd:: Chat-->
+
+    <!--<div class="container">
+        <main role="main" class="pb-3">
+            @@RenderBody()
+        </main>
+    </div>-->
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - WebMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+    <!-- begin::Global Config(global config for global JS sciprts) -->
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#22b9ff",
+                    "light": "#ffffff",
+                    "dark": "#282a3c",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995"
+                },
+                "base": {
+                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+                }
+            }
+        };
+    </script>
+    <!-- end::Global Config -->
+    <!--begin::Global Theme Bundle(used by all pages) -->
+    <script src="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+    <script src="~/lib/metronic/dist/assets/js/scripts.bundle.js" type="text/javascript"></script>
+    <!--end::Global Theme Bundle -->
+
+    <!--begin::Page Scripts(used by this page) -->
+    <script src="~/lib/metronic/dist/assets/js/pages/dashboard.js" type="text/javascript"></script>
+    <!--end::Page Scripts -->
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

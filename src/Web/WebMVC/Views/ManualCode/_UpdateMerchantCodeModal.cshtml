@@ -1,0 +1,59 @@
+﻿@using WebMVC.Models
+<div id="modal__update_merchant_qrcode_data" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">更新二维码数据</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_update_merchant_qrcode_data" asp-controller="ManualCode" asp-action="UpdateMerchantCode" class="kt-form" method="post">
+                    <div class="form-group">
+                        <label for="userId" class="form-control-label">二维码编号 :</label>
+                        <input type="text" class="form-control" name="qrcodeid" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="">应用ID</label>
+                        <div class="">
+                            <input name="appid" class="form-control" type="text" placeholder="">
+                            <span class="form-text text-muted"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="">支付宝公钥</label>
+                        <div class="">
+                            <input name="alipaypublickey" class="form-control" type="text" placeholder="">
+                            <span class="form-text text-muted"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="">微信API证书</label>
+                        <div>
+                            <input name="wechatapicertificate" class="form-control" type="text" placeholder="">
+                            <span class="form-text text-muted"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="">私钥</label>
+                        <div>
+                            <input name="privatekey" class="form-control" type="text" placeholder="">
+                            <span class="form-text text-muted"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="">商户ID</label>
+                        <div>
+                            <input name="merchantid" class="form-control" type="text" placeholder="">
+                            <span class="form-text text-muted"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

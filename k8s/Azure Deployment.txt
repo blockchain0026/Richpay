@@ -1,0 +1,17 @@
+1.Login
+az login
+
+2.Update kube config.
+az aks get-credentials --resource-group xxx --name xxx
+
+3.Push Image
+  3-1. login to docker from the docker you download in your pc.
+  3-2. docker tag [Image Id] your_username/[Image Name]:[tag]
+  3-3. docker push your_username/[Image Name]:[tag]
+  3-4. Update your yaml or helm chart to use your image.
+
+4.Deploy (Please refers kubernetes.txt.)
+
+5.Update nginx conf to allow large header.
+kubectl apply -f aks-httpaddon-cfg.yaml
+

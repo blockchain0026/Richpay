@@ -1,0 +1,24 @@
+1.Login
+gcloud auth login
+
+2. Update Kubectl Config
+gcloud container clusters get-credentials [Cluster Name]
+
+3.Push Image
+  3-1. login to docker from the docker you download in your pc.
+  3-2. docker tag [Image Id] your_username/[Image Name]:[tag]
+  3-3. docker push your_username/[Image Name]:[tag]
+  3-4. Update your yaml or helm chart to use your image.
+
+4.Create a disk for sql database.
+  3-1. Create a disk on cloud platform.
+  3-2. Update "pdNAme" in values.yaml to the name of the disk you just created for your sql-data helm chart.
+
+5.(optional) Create DNS Zone For your domain name, login to your domain registry and point the dns server to the dns server address you just get by your DNS Zone.
+  3-1. Create a A Record for your DNS Zone and set the ip address to your nginx external address. (If you don't have a static ip address, do this step after you created your cluster and deployed the ingress nginx controller, then you can get the external ip address by kubectl command and use it for this step.)
+
+6.Recommand Resource Allocations:
+Sql Data 8cpu*1
+Web Background Tasks 5cpu*1
+Web MVC 8cpu*2
+For 150~200 order concurrencies.

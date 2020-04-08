@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <title>@ViewData["Title"] - Login</title>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->
+    <!--begin::Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700">
+    <!--end::Fonts -->
+
+    @if (IsSectionDefined("AddToHead"))
+    {
+        @RenderSection("AddToHead", required: false)
+    }
+
+    <!--begin::Global Theme Styles(used by all pages) -->
+    <link href="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/metronic/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles -->
+
+</head>
+<body>
+    @RenderBody()
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - WebMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+    <!--begin::Global Theme Bundle(used by all pages) -->
+    <script src="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+    <script src="~/lib/metronic/dist/assets/js/scripts.bundle.js" type="text/javascript"></script>
+    <!--end::Global Theme Bundle -->
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,5 @@
+C:\repo\Richpay\src\Distributing\Distributing.Infrastructure\bin\Debug\netstandard2.0\Distributing.Infrastructure.deps.json
+C:\repo\Richpay\src\Distributing\Distributing.Infrastructure\bin\Debug\netstandard2.0\Distributing.Infrastructure.dll
+C:\repo\Richpay\src\Distributing\Distributing.Infrastructure\obj\Debug\netstandard2.0\Distributing.Infrastructure.AssemblyInfoInputs.cache
+C:\repo\Richpay\src\Distributing\Distributing.Infrastructure\obj\Debug\netstandard2.0\Distributing.Infrastructure.AssemblyInfo.cs
+C:\repo\Richpay\src\Distributing\Distributing.Infrastructure\obj\Debug\netstandard2.0\Distributing.Infrastructure.csprojAssemblyReference.cache

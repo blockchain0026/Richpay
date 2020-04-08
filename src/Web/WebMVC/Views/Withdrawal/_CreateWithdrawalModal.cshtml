@@ -1,0 +1,71 @@
+﻿@model WebMVC.ViewModels.WithdrawalViewModels.IndexViewModel
+@using WebMVC.Models.Roles
+
+<div id="modal__create_withdrawal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">申请提款</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_create_withdrawal" asp-controller="Withdrawal" asp-action="Create" class="kt-form" method="post">
+
+                    @if (User.IsInRole(Roles.Manager))
+                    {
+                        <div class="form-group">
+                            <label for="userId" class="form-control-label">提款用户 :</label>
+
+                            <select class="form-control kt-select2" id="UserId" name="userid">
+                                <option></option>
+                            </select>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label for="userId" class="form-control-label">用户编号 :</label>
+                            <input type="text" class="form-control" id="UserId" name="userid" readonly>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label for="currentbalance" class="form-control-label">当前可用余额 :</label>
+                        <input type="text" class="form-control" id="currentbalance" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="WithdrawalBankOptionId" class="form-control-label">银行名称 :</label>
+                        <select asp-items="@Model.WithdrawalBankOptions" id="WithdrawalBankOptionId" name="withdrawalbankoptionid" class="form-control kt-selectpicker">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="AccountName" class="form-control-label">账户名称 :</label>
+                        <input type="text" class="form-control" id="AccountName" name="accountname" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="AccountNumber" class="form-control-label">银行账号 :</label>
+                        <input type="text" class="form-control" id="AccountNumber" name="accountnumber" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="WithdrawalAmount" class="form-control-label">金额 :</label>
+                        <input type="text" class="form-control" id="WithdrawalAmount" name="withdrawalamount" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Description" class="form-control-label">备注 :</label>
+                        <textarea class="form-control" id="Description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

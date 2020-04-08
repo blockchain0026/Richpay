@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  name: nginx-configuration
+  namespace: ingress-nginx
+data:
+  #set body size to solve pc browser issue.
+  proxy-buffer-size: "128k"
+  proxy-buffers: "4 256k"
+  large-client-header-buffers: "4 32k"
+  proxy-body-size: "10m"
+  client-body-buffer-size: "128k"
+  #set the http2 size to solve mobile browser issue.
+  http2-max-field-size: "128k"
+  http2-max-header-size: "128k"

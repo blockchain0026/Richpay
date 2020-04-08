@@ -1,0 +1,54 @@
+replicaCount: 1
+
+image:
+  repository: microsoft/mssql-server-linux
+  tag: 2017-CU7
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 1433
+
+persistence:
+  accessMode: ReadWriteOnce
+  enabled: true
+  size: 8000Gi
+  #For existing persistence volume
+  claimRefNamespace: richpay
+  claimRefName: sql-data-claim
+  pdName: sql-data-disk
+  fsType: ext4
+
+resources:
+  requests:
+    cpu: 7000m
+    memory: 28000Mi
+
+serviceType: ClusterIP
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+inf:
+  mesh:
+    enabled: false          # True to enable Linkerd (set by deploy-all.ps1)
+  tls:
+    enabled: false          # True to enable TLS (set by deploy-all.ps1)
+    issuer: ""              # cert-manager issuer to use for retrieving certs (set by deploy-all.ps1)
+  sql:                      # inf.sql defines the sql server databases & logins
+#    host:  my-sql-server   # Uncomment to specify a custom sql-server to be used. By default "sql-data-<appname>" will be used  
+    common:
+      user: sa              # SQL user
+      pwd: 1Secure*Password1        # SQL pwd
+      pid: Developer
+    webmvc:                # inf.sql.catalog: settings for the catalog-api sql (user, pwd, db)
+      db: richpay.db         # Catalog API SQL db name
+    distributing:               # inf.sql.ordering: settings for the ordering-api sql (user, pwd, db)
+      db: richpay.distributing.db        # Ordering API SQL db name
+    pairing:
+      db: richpay.pairing.db        # Ordering API SQL db name
+    ordering:
+      db: richpay.ordering.db       # Marketing API SQL db name

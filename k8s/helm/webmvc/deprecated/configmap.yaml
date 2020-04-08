@@ -1,0 +1,20 @@
+{{- $name := include "webmvc.fullname" . -}}
+{{- $sqlsrv := include "sql-name" . -}}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "cfg-{{ $name }}"
+  labels:
+    app: {{ template "whiskyrecording-api.name" . }}
+    chart: {{ template "whiskyrecording-api.chart" .}}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  richpay__ConnectionString__DefaultConnection: Server={{ $sqlsrv }};Initial Catalog={{ .Values.inf.sql.webmvc.db }};User Id={{ .Values.inf.sql.common.user }};Password={{ .Values.inf.sql.common.pwd }};
+  richpay__ConnectionString__DistributingConnection: Server={{ $sqlsrv }};Initial Catalog={{ .Values.inf.sql.distributing.db }};User Id={{ .Values.inf.sql.common.user }};Password={{ .Values.inf.sql.common.pwd }};
+  richpay__ConnectionString__PairingConnection: Server={{ $sqlsrv }};Initial Catalog={{ .Values.inf.sql.pairing.db }};User Id={{ .Values.inf.sql.common.user }};Password={{ .Values.inf.sql.common.pwd }};
+  richpay__ConnectionString__OrderingConnection: Server={{ $sqlsrv }};Initial Catalog={{ .Values.inf.sql.ordering.db }};User Id={{ .Values.inf.sql.common.user }};Password={{ .Values.inf.sql.common.pwd }};
+  richpay__DefaultAccount__DefaultUsername: Server={{ $sqlsrv }};Initial Catalog={{ .Values.inf.sql.ordering.db }};User Id={{ .Values.inf.sql.common.user }};Password={{ .Values.inf.sql.common.pwd }};
+  richpay__ConnectionString__OrderingConnection: Server={{ $sqlsrv }};Initial Catalog={{ .Values.inf.sql.ordering.db }};User Id={{ .Values.inf.sql.common.user }};Password={{ .Values.inf.sql.common.pwd }};
+  richpay__ConnectionString__OrderingConnection: Server={{ $sqlsrv }};Initial Catalog={{ .Values.inf.sql.ordering.db }};User Id={{ .Values.inf.sql.common.user }};Password={{ .Values.inf.sql.common.pwd }};

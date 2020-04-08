@@ -1,0 +1,44 @@
+﻿<div id="modal__update_barcode_qrcode_data" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">更新二维码数据</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_update_barcode_qrcode_data" asp-controller="ManualCode" asp-action="UpdateBarcode" class="kt-form" method="post">
+                    <div class="form-group">
+                        <label for="userId" class="form-control-label">二维码编号 :</label>
+                        <input type="text" class="form-control" name="qrcodeid" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="">上传个码*</label>
+                        <div class="">
+                            <div class="kt-avatar kt-avatar--outline" id="kt_update_barcode_add_qrcode">
+                                <div class="kt-avatar__holder" id="kt_update_barcode_qrcode_data" style="background-image: url(assets/media/users/300_10.jpg) "></div>
+                                <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Change avatar">
+                                    <i class="fa fa-pen"></i>
+                                    <input type="file" id="kt_update_barcode_qrcode_file_input" name="qrcodefile" accept="image/*">
+                                </label>
+                                <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                            </div>
+                            <input id="kt_update_barcode_qrcode_url" name="qrcodeurl" class="form-control" type="text" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="">个码金额</label>
+                        <input name="amount" class="form-control" type="text" placeholder="若为任意码则留空">
+                        <span class="form-text text-muted">若为任意码则留空</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

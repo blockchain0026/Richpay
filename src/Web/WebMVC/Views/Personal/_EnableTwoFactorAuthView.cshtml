@@ -1,0 +1,55 @@
+﻿@model WebMVC.ViewModels.PersonalViewModels.EnableTwoFactorAuthViewModel
+
+<div id="modal__enable_two_factor_auth" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">开启GA验证</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p>通过下列顺序来开启GA二步认证:</p>
+                    <ol class="list">
+                        <li>
+                            <p>
+                                下载验证应用程序
+                                <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en" class="kt-link">Android</a> 或
+                                <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" class="kt-link">iOS</a>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>扫描二维码或输入 <kbd id="two_factor_shared_key" style="background-color:dimgray;"></kbd> 到你的验证APP中。(可省去空白)</p>
+                            <div id="qrCode"></div>
+
+                            <img id="qrcode_image" src="" alt="" style="height:150px;width:150px;" />
+
+                            <div id="qrCodeData" data-url=""></div>
+                        </li>
+                        <li>
+                            <p>
+                                扫描QR码或输入上方的密钥后，您的身份验证应用程序将为您提供唯一的代码。
+                                在下面的确认框中输入代码。
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form id="enable_two_factor_auth_form_send_code" asp-controller="Personal" asp-action="EnableTwoFactorAuth" method="post">
+                                        <div class="form-group">
+                                            <label class="control-label">认证码</label>
+                                            <input asp-for="Code" class="form-control" autocomplete="off" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" data-action="submit">认证</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

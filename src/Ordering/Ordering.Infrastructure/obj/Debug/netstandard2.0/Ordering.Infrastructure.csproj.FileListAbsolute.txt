@@ -1,0 +1,5 @@
+C:\repo\Richpay\src\Ordering\Ordering.Infrastructure\bin\Debug\netstandard2.0\Ordering.Infrastructure.deps.json
+C:\repo\Richpay\src\Ordering\Ordering.Infrastructure\bin\Debug\netstandard2.0\Ordering.Infrastructure.dll
+C:\repo\Richpay\src\Ordering\Ordering.Infrastructure\obj\Debug\netstandard2.0\Ordering.Infrastructure.csprojAssemblyReference.cache
+C:\repo\Richpay\src\Ordering\Ordering.Infrastructure\obj\Debug\netstandard2.0\Ordering.Infrastructure.AssemblyInfoInputs.cache
+C:\repo\Richpay\src\Ordering\Ordering.Infrastructure\obj\Debug\netstandard2.0\Ordering.Infrastructure.AssemblyInfo.cs

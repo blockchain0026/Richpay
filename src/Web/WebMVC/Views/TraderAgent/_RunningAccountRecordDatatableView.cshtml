@@ -1,0 +1,128 @@
+﻿<div id="modal_running_account_record_datatable" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="min-height: 590px;">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    流水纪录
+                    <small>追踪代理的流水纪录</small>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--begin: Search Form -->
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <div class="col-md-2 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>订单状态:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <select class="form-control bootstrap-select" id="kt_order_status_filter">
+                                                <option value="">全部</option>
+                                                <option value="Submitted">提交</option>
+                                                <option value="AwaitngPayment">付款中</option>
+                                                <option value="Success">成功</option>
+                                                <option value="Failed">失败</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>支付类型:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <select class="form-control bootstrap-select" id="kt_order_payment_channel_filter">
+                                                <option value="">全部</option>
+                                                <option value="Alipay">支付宝</option>
+                                                <option value="Wechat">微信</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>支付通道:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <select class="form-control bootstrap-select" id="kt_order_payment_scheme_filter">
+                                                <option value="">全部</option>
+                                                <option value="Barcode">个码</option>
+                                                <option value="Merchant">原生码</option>
+                                                <option value="Transaction">转账</option>
+                                                <option value="Bank">转银行</option>
+                                                <option value="Envelop">红包</option>
+                                                <option value="EnvelopPassword">口令红包</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--begin::Date Range Picker-->
+                                <div class="col-md-2">
+                                    <div class="kt-input-icon kt-input-icon--pill kt-input-icon--right" style="width:220px;">
+                                        <a href="#" class="form-control form-control-pill" id="kt_dashboard_daterangepicker" data-toggle="kt-tooltip" title="" data-placement="left" data-original-title="选取订单日期">
+                                            <span class="" id="kt_dashboard_daterangepicker_date"></span>
+                                        </a>
+                                        <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="flaticon2-calendar-1"></i></span></span>
+
+                                        <input id="order_search_from" name="from" hidden />
+                                        <input id="order_search_to" name="to" hidden />
+                                    </div>
+                                </div>
+                                <!--end::Date Range Picker-->
+                                <div class="col-md-1 kt-margin-l-100  kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>总笔数:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <h4 id="sum_data_order_total_count">0笔</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>总成交:</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <h4 id="sum_data_order_total_success_amount" class="kt-font-primary">0¥</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="">
+                                        <div class="kt-form__label">
+                                            <label>总利润 :</label>
+                                        </div>
+                                        <div class="kt-form__control">
+                                            <h4 id="sum_data_order_total_commission" class="kt-font-success">0¥</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end: Search Form -->
+            </div>
+            <div class="modal-body modal-body-fit">
+
+                <!--begin: Datatable -->
+                <div id="datatable_running_account_record"></div>
+                <input id="current_running_account_record_user_id" hidden />
+                <!--end: Datatable -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

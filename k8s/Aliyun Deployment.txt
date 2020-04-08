@@ -1,0 +1,19 @@
+创建Kubernetes集群
+1.创建镜像 (仓库地域:日本)
+  1-1.登录阿里云Docker Registry
+      docker login --username=pet973926 registry.ap-northeast-1.aliyuncs.com
+  1-2.将镜像推送到Registry
+      docker tag [ImageId] registry.ap-northeast-1.aliyuncs.com/richpay/webmvc:[镜像版本号]
+      docker push registry.ap-northeast-1.aliyuncs.com/richpay/webmvc:[镜像版本号]
+
+2.创建专有网路
+  名称:richpay-vpc
+  网段:10.0.0.0/8
+
+3.创建交换机
+  名称:richpay-vpc-switch
+  网段:10.99.0.0/16
+
+kubectl配置
+1.将阿里云提供的集群凭据复制到 User\.kube 的Config档案里
+

@@ -1,0 +1,140 @@
+# Default values for webmvc.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+fullnameOverride: webmvc
+replicaCount: 1
+image:
+  repository: webmvc
+  tag: dev
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+  # Optionally specify an array of imagePullSecrets.
+  # Secrets must be manually created in the namespace.
+  # ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+  #
+  # This uses credentials from secret "myRegistryKeySecretName".
+  # - name: myRegistryKeySecretName
+service:
+  type: ClusterIP
+  port: 80
+
+probes:
+  enabled: false
+
+ingress:
+  enabled: false
+  annotations:
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  # hosts:
+  #   - chart-example.local
+  tls: []
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+secrets: {}
+  # Optionally specify a set of secret objects whose values
+  # will be injected as environment variables by default.
+  # You should add this section to a file like secrets.yaml
+  # that is explicitly NOT committed to source code control
+  # and then include it as part of your helm install step.
+  # ref: https://kubernetes.io/docs/concepts/configuration/secret/
+  #
+  # This creates a secret "mysecret" and injects "mypassword"
+  # as the environment variable mysecret_mypassword=password.
+  # mysecret:
+  #   mypassword: password
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+inf:
+  mesh:
+    enabled: false          # True to enable Linkerd (set by deploy-all.ps1)
+  tls:
+    enabled: false          # True to enable TLS (set by deploy-all.ps1)
+    issuer: ""              # cert-manager issuer to use for retrieving certs (set by deploy-all.ps1)
+  sql:                      # inf.sql defines the sql server databases & logins
+#    host:  my-sql-server   # Uncomment to specify a custom sql-server to be used. By default "sql-data-<appname>" will be used  
+    common:
+      user: sa              # SQL user
+      pwd: 1Secure*Password1        # SQL pwd
+      pid: Developer
+    webmvc:                # inf.sql.catalog: settings for the catalog-api sql (user, pwd, db)
+      db: richpay.db         # Catalog API SQL db name
+    distributing:               # inf.sql.ordering: settings for the ordering-api sql (user, pwd, db)
+      db: richpay.distributing.db        # Ordering API SQL db name
+    pairing:
+      db: richpay.pairing.db        # Ordering API SQL db name
+    ordering:
+      db: richpay.ordering.db       # Marketing API SQL db name
+  appSettings:
+    defaultAccount:
+      username: admin
+      email: admin@gmail.com
+      password: test123
+    defaultTraderAgent:
+      username: tagent
+      email: tagent@gmail.com 
+      password: test123
+    defaultTrader:
+      username: trader
+      email: trader@gmail.com
+      password: test123
+    defaultShopAgent:
+      username: sagent
+      email: sagent@gmail.com
+      password: test123
+    defaultShop:
+      username: shop
+      email: shop@gmail.com
+      password: test123
+    clearCompletedOrderSettings:
+      checkTime: 60000
+    resolveCompletedDistributionSettings:
+      checkTime: 30000
+
+# env defines the environment variables that will be declared in the pod
+env:
+  urls:
+  # configmap declares variables which value is taken from the config map defined in template configmap.yaml (name is name of var and key the key in configmap).
+  configmap:
+    - name: UseLoadTest
+      key: all_EnableLoadTest
+    - name: WhiskyArchiveUrl
+      key: internalurls__apigwww
+    - name: ExternalWhiskyArchiveUrl
+      key: urls__apigwww
+    - name: CallBackUrl
+      key: urls__mvc
+    - name: IdentityUrl
+      key: urls__IdentityUrl
+    - name: WhiskyArchiveUrlHC
+      key: internalurls__apigwww__hc
+    - name: IdentityUrlHC
+      key: internalurls__identity__hc
+    - name: WhiskyRecordingUrlHC
+      key: internalurls__whiskyrecording__hc
+      # values define environment variables with a fixed value (no configmap involved) (name is name of var, and value is its value)
+  values:
+    - name: ASPNETCORE_ENVIRONMENT
+      value: Development
+    - name: ASPNETCORE_URLS
+      value: https://+:443;http://+:80
+    - name: OrchestratorType
+      value: 'K8S'
+    - name: IsClusterEnv
+      value: 'True'

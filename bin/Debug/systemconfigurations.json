@@ -1,0 +1,71 @@
+{
+  "SiteBaseInfo": {
+    "SiteTitle": "大闪付帝国",
+    "ContactAddress": "address address addressrich123skype321arich123skyp",
+    "ContactEmail": "contact@richpay.comrich123skype321arich123skype321",
+    "ConsumerHotline": "+18123456789rich123skype321arich123skype321arich12",
+    "ConsumerServiceQQ": "contact@qq.comrich123s                            ",
+    "ConsumerServiceSkype": "rich123skype321arich123skype321arich123skype32",
+    "BusinessHoursFrom": "11:11",
+    "BusinessHoursTo": "12:12"
+  },
+  "Payment": {
+    "PaymentTimeoutInSecond": 10,
+    "SellRequestCountdownInSecond": 60000,
+    "AlipayPaymentTemplate": {
+      "SecondsBeforePayment": 0,
+      "IsAmountUnchangeable": false,
+      "IsAccountUnchangeable": false,
+      "IsH5RedirectByScanEnabled": false,
+      "IsH5RedirectByClickEnabled": false,
+      "IsH5RedirectByPickingPhotoEnabled": false
+    }
+  },
+  "SystemNotificationSound": {
+    "Withdraw": true,
+    "Deposit": true,
+    "Member": true,
+    "QrCode": true,
+    "NewOrder": false,
+    "OrderTimeout": false
+  },
+  "UserNotification": {
+    "OrderTimeout": true,
+    "SuccessDeposit": true
+  },
+  "WithdrawalAndDeposit": {
+    "WithdrawalTemplate": {
+      "EachAmountUpperLimit": 5000,
+      "EachAmountLowerLimit": 300,
+      "DailyAmountLimit": 50000,
+      "DailyFrequencyLimit": 5,
+      "CommissionInThousandth": 10
+    },
+    "WithdrawalOpenFrom": "00:00",
+    "WithdrawalOpenTo": "12:00",
+    "DepositOpenFrom": "20:03",
+    "DepositOpenTo": "16:38"
+  },
+  "PaymentChannel": {
+    "OpenFrom": "12:00",
+    "OpenTo": "23:59",
+    "AutoToggle": true
+  },
+  "QrCodeConf": {
+    "RiskControlTemplate": {
+      "AutoPairingBySuccessRate": true,
+      "AutoPairingByQuotaLeft": true,
+      "AutoPairingByBusinessHours": false,
+      "AutoPairingByCurrentConsecutiveFailures": true,
+      "AutoPairngByAvailableBalance": true,
+      "SuccessRateThresholdInHundredth": 50,
+      "SuccessRateMinOrders": 10,
+      "QuotaLeftThreshold": 300,
+      "CurrentConsecutiveFailuresThreshold": 3,
+      "AvailableBalanceThreshold": 100,
+      "DailyAmountLimit": 5000,
+      "OrderAmountUpperLimit": 5000,
+      "OrderAmountLowerLimit": 1
+    }
+  }
+}

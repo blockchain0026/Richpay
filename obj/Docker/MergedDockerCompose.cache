@@ -1,0 +1,45 @@
+services:
+  seq:
+    environment:
+      ACCEPT_EULA: "Y"
+    image: datalust/seq:latest
+    ports:
+    - published: 5340
+      target: 80
+  sql.data:
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: 1Secure*Password1
+    image: microsoft/mssql-server-linux:2017-latest
+  webbackgroundtasks:
+    build:
+      context: C:\Users\User\Desktop\Richpay
+      dockerfile: src/BackgroundServices/WebWorkerService/Dockerfile
+    depends_on:
+    - sql.data
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: webbackgroundtasks
+    restart: always
+  webmvc:
+    build:
+      context: C:\Users\User\Desktop\Richpay
+      dockerfile: src/Web/WebMVC/Dockerfile
+    depends_on:
+    - sql.data
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: webmvc
+    ports:
+    - published: 80
+      target: 80
+    - published: 443
+      target: 443
+    restart: always
+    volumes:
+    - C:\Users\User\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\User\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

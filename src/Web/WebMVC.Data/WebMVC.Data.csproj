@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Polly" Version="7.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Distributing\Distributing.Domain\Distributing.Domain.csproj" />
+    <ProjectReference Include="..\..\Distributing\Distributing.Infrastructure\Distributing.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Ordering\Ordering.Domain\Ordering.Domain.csproj" />
+    <ProjectReference Include="..\..\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Pairing\Pairing.Domain\Pairing.Domain.csproj" />
+    <ProjectReference Include="..\..\Pairing\Pairing.Infrastructure\Pairing.Infrastructure.csproj" />
+    <ProjectReference Include="..\WebMVC.Model\WebMVC.Model.csproj" />
+  </ItemGroup>
+
+</Project>

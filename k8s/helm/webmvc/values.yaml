@@ -1,0 +1,104 @@
+# Default values for webmvc.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+fullnameOverride: webmvc
+replicaCount: 2
+image:
+  repository: docker.io/blockchain0026/webmvc #Use docker repo
+  tag: latest
+  pullPolicy: Always
+imagePullSecrets:
+  - name: regcred
+  # Optionally specify an array of imagePullSecrets.
+  # Secrets must be manually created in the namespace.
+  # ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+service:
+  type: ClusterIP
+  port: 80
+  #sslport: 443
+
+probes:
+  enabled: false
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+    #redirect the non www request to www.
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+
+    #Disable ssl redirect to solve the login issue on moblie browser.
+    ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+    #for multiple nodes, use sticky cookie to prevent infinit redirects and other problems.
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
+
+  labels: {}
+  hosts:
+    - "www.richpay168.com"
+    #- ""
+  path: /
+  tls:
+    - secretName: webmvc-tls
+      hosts:
+        - "www.richpay168.com"
+secrets: {}
+  # Optionally specify a set of secret objects whose values
+  # will be injected as environment variables by default.
+  # You should add this section to a file like secrets.yaml
+  # that is explicitly NOT committed to source code control
+  # and then include it as part of your helm install step.
+  # ref: https://kubernetes.io/docs/concepts/configuration/secret/
+  #
+  # This creates a secret "mysecret" and injects "mypassword"
+  # as the environment variable mysecret_mypassword=password.
+  # mysecret:
+  #   mypassword: password
+resources:
+  # {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  requests:
+    cpu: 7000m
+    memory: 20000Mi
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+inf:
+  mesh:
+    enabled: false          # True to enable Linkerd (set by deploy-all.ps1)
+  tls:
+    enabled: true          # True to enable TLS (set by deploy-all.ps1)
+    issuer: "letsencrypt-prod"              # cert-manager issuer to use for retrieving certs (set by deploy-all.ps1)
+    #issuer: "test-selfsigned"              # cert-manager issuer to use for retrieving certs (set by deploy-all.ps1)
+  sql:                      # inf.sql defines the sql server databases & logins
+#    host:  my-sql-server   # Uncomment to specify a custom sql-server to be used. By default "sql-data-<appname>" will be used  
+    common:
+      user: sa              # SQL user
+      pwd: 1Secure*Password1        # SQL pwd
+      pid: Developer
+    webmvc:                # inf.sql.catalog: settings for the catalog-api sql (user, pwd, db)
+      db: richpay.db         # Catalog API SQL db name
+    distributing:               # inf.sql.ordering: settings for the ordering-api sql (user, pwd, db)
+      db: richpay.distributing.db        # Ordering API SQL db name
+    pairing:
+      db: richpay.pairing.db        # Ordering API SQL db name
+    ordering:
+      db: richpay.ordering.db       # Marketing API SQL db name
+# env defines the environment variables that will be declared in the pod
+env:
+  values:
+    - name: ASPNETCORE_ENVIRONMENT
+      value: Development
+    - name: ASPNETCORE_URLS
+      value: https://+:443;http://+:80

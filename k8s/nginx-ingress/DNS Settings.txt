@@ -1,0 +1,8 @@
+1.Register a domain.
+
+2.Use google cloud dns service, Create New DNS Zone.
+  2-1.(No www)
+
+3.Create A Record
+  3-1.Add www to your name.
+  3-2.Set Your VM IP Address to it.

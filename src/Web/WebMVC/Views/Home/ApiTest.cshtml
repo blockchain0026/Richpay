@@ -1,0 +1,249 @@
+﻿@using Microsoft.Extensions.Options
+@using WebMVC.Models.Roles
+
+@inject IOptionsSnapshot<SystemConfigurations> settings
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <title>@ViewData["Title"] </title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="Latest updates and statistic charts">
+
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    -->
+    <!--begin::Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700|Noto+Sans+SC:300,400,500,600,700">
+    <!--end::Fonts -->
+    <!--begin::Global Theme Styles(used by all pages) -->
+    <link href="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/metronic/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles -->
+
+    <link rel="shortcut icon" href="~/lib/metronic/dist/assets/media/logos/favicon.ico" />
+
+</head>
+<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading">
+
+    <div class="kt-grid kt-grid--hor kt-grid--root">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+
+                <button onclick="modalCreateApiOrderFiveTimesPerSecond()">API测试订单(X笔/秒)</button>
+                <!-- begin:: Footer -->
+                <div class="kt-footer  kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
+                    <div class="kt-container  kt-container--fluid ">
+                        <div class="kt-footer__copyright">
+                            2019&nbsp;&copy;&nbsp;<a asp-controller="Home" asp-action="Index" target="_blank" class="kt-link">@settings.Value.SiteBaseInfo.SiteTitle</a>
+                        </div>
+                        <div class="kt-footer__menu">
+                            <a href="" target="_blank" class="kt-footer__menu-link kt-link">About</a>
+                            <a href="" target="_blank" class="kt-footer__menu-link kt-link">Team</a>
+                            <a href="" target="_blank" class="kt-footer__menu-link kt-link">Contact</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end:: Footer -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- begin::Global Config(global config for global JS sciprts) -->
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#22b9ff",
+                    "light": "#ffffff",
+                    "dark": "#282a3c",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995"
+                },
+                "base": {
+                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+                }
+            }
+        };
+
+        // create conccurrency orders per second to platform.
+        function modalCreateApiOrderFiveTimesPerSecond() {
+            swal.mixin({
+                buttonsStyling: false,
+                input: 'text',
+                //text: "确认开始并发测试 (10笔/秒) 吗? 请准备足够的二维码并确认轮巡已开启...",
+                type: "info",
+
+                confirmButtonText: "下一步",
+                confirmButtonClass: "btn btn-sm btn-bold btn-success",
+
+                showCancelButton: true,
+                cancelButtonText: "取消",
+                cancelButtonClass: "btn btn-sm btn-bold btn-brand",
+
+                showLoaderOnConfirm: true,
+
+                progressSteps: ['1', '2', '3', '4', '5'],
+
+                allowOutsideClick: () => !Swal.isLoading(),
+            }).queue([
+                '商户ID',
+                '商户API KEY',
+                '每秒笔数',
+                '金额',
+                '伺服器IP'
+            ]).then(function (result) {
+                if (result.value) {
+                    var shopId = result.value[0];
+                    var apiKey = result.value[1];
+                    var orderPerSecond = result.value[2];
+                    var amount = parseInt(result.value[3]);
+                    var serverIP = result.value[4];
+                    var createOrderInterval;
+
+                    swal.fire({
+                        title: '开始API并发测试...',
+                        text: '点选结束来结束测试',
+                        type: 'success',
+                        buttonsStyling: false,
+                        confirmButtonText: "结束",
+                        confirmButtonClass: "btn btn-sm btn-bold btn-brand",
+                        html:
+                            '已建立 <b id="swal_concurrency_order_created_count">0</b> 笔订单, ' +
+                            '已确认 <b id="swal_concurrency_order_confirmed_count">0</b> 笔订单',
+                        allowOutsideClick: false
+                    }).then((result) => {
+                        if (result.value) {
+                            clearInterval(createOrderInterval);
+                            datatable.reload();
+                        }
+                    })
+
+                    var createdCount = 0;
+                    var confirmedCount = 0;
+                    var orderCount = [];
+
+                    for (var i = 1; i <= orderPerSecond; i++) {
+                        orderCount.push(i);
+                    }
+
+                    createOrderInterval = setInterval(function () {
+                        $(orderCount).each(function () {
+                            var randomNumber = Math.floor(Math.random() * (305 - 1 + 1)) + 1;
+                            var randomOrderNumber = Math.floor(Math.random() * (10000000 - 1 + 1)) + 1;
+                            var randomAmount = Math.floor(Math.random() * ((500 + 1) + 100)) + 1;
+                            let data = {
+                                //ShopId: 'ea4b4d46-d58d-4097-9ff6-1e00773f5b04',
+                                lsh: 'test' + randomOrderNumber + 'a',
+                                money: amount,
+                                user: shopId,
+                                time: '2020-02-20 11:11:11',
+                                type: "5",
+                                reurl: "https:\/\/xintdpay.com",
+                                okreurl: "https:\/\/xintdpay.com",
+                                ch: ''
+                            };
+                            var md5Hash = $.md5(data.lsh + data.money + data.user + data.time + data.type + data.reurl + data.okreurl + apiKey);
+                            data.ch = md5Hash;
+
+                            $.ajax({
+                                url: "https://" + serverIP + "/api/order",
+                                type: "POST",
+                                contentType: "application/json",
+                                data: JSON.stringify(data),
+                                success: function (response) {
+                                    createdCount = createdCount + 1;
+
+                                    $('#swal_concurrency_order_created_count').html(createdCount);
+                                    $('#swal_concurrency_order_confirmed_count').html(createdCount);
+                                    /*var orderId = response.orderId;
+                                    if (orderId) {
+                                        console.log('Create Order:' + orderId + '. Result: Success!');
+
+                                        function myAjaxRequest() {
+                                            $.ajax({
+                                                url: "Order/ConfirmPaymentByAdmin",
+                                                type: "POST",
+                                                contentType: "application/json",
+                                                data: JSON.stringify(orderId),
+                                                success: function (response) {
+                                                    if (response.success) {
+                                                        console.log('Confirm Order:' + orderId + '. Result: Success!');
+                                                        confirmedCount = confirmedCount + 1;
+                                                        $('#swal_concurrency_order_confirmed_count').html(confirmedCount);
+                                                    }
+                                                    else {
+                                                        console.log('Confirm Order:' + orderId + '. Result: Failed. Retry....');
+                                                        setTimeout(() => {
+                                                            myAjaxRequest()
+                                                        }, 12000);
+                                                    }
+                                                },
+                                                error: function () {
+                                                    console.log('Confirm Order:' + orderId + '. Result: Error. Retry....');
+                                                    setTimeout(() => {
+                                                        myAjaxRequest()
+                                                    }, 12000); // if there was an error, wait 5 seconds and re-run the function
+                                                }
+                                            })
+                                        }
+
+                                        myAjaxRequest();
+                                    }
+                                    else {
+                                        console.log('Create Order:' + orderId + '. Result: Failed.');
+                                    }*/
+                                },
+                                error: function (response) {
+                                    console.log('Create Order Result: Error.');
+                                    console.log(response);
+                                    //reject(response.responseText)
+                                }
+                            })
+                        });
+                    }, 1000);
+                } else if (result.dismiss === 'cancel') {
+                    swal.fire({
+                        title: '已取消',
+                        text: '',
+                        type: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: "OK",
+                        confirmButtonClass: "btn btn-sm btn-bold btn-brand",
+                    });
+                }
+            });
+        };
+
+
+
+    </script>
+    <!-- end::Global Config -->
+    <!--begin::Global Theme Bundle(used by all pages) -->
+    <script src="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+    <script src="~/lib/metronic/dist/assets/js/scripts.bundle.js" type="text/javascript"></script>
+    <script src="~/js/shared/jquery.md5.js" type="text/javascript"></script>
+
+
+    <script src="~/js/site.js"></script>
+    <!--end::Global Theme Bundle -->
+    <!--begin::Page Scripts(used by this page) -->
+    <!--end::Page Scripts -->
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+
+</body>
+</html>

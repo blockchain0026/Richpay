@@ -1,0 +1,368 @@
+﻿@using Microsoft.Extensions.Options
+@using WebMVC.Models.Roles
+
+@inject IOptionsSnapshot<SystemConfigurations> settings
+
+@{
+    ViewData["TraderAgentListAction"] = "Index";
+    ViewData["ShopAgentListAction"] = "Index";
+    ViewData["OrderListAction"] = "Index";
+
+    if (User.IsInRole(Roles.TraderAgent))
+    {
+        ViewData["TraderAgentListAction"] = "Downlines";
+    }
+    if (User.IsInRole(Roles.ShopAgent))
+    {
+        ViewData["ShopAgentListAction"] = "Downlines";
+    }
+    if (!User.IsInRole(Roles.Manager)
+        && !User.IsInRole(Roles.Shop)
+        && !User.IsInRole(Roles.Trader))
+    {
+
+        ViewData["OrderListAction"] = "RunningAccountRecords";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <title>@ViewData["Title"] | Dashboard</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="Latest updates and statistic charts">
+
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    -->
+    <!--begin::Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700|Noto+Sans+SC:300,400,500,600,700">
+    <!--end::Fonts -->
+    <!--begin::Global Theme Styles(used by all pages) -->
+    <link href="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/metronic/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles -->
+
+    <link rel="shortcut icon" href="~/lib/metronic/dist/assets/media/logos/favicon.ico" />
+
+    @if (IsSectionDefined("AddToHead"))
+    {
+        @RenderSection("AddToHead", required: false)
+    }
+</head>
+<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading">
+    <!-- begin:: Header Mobile -->
+    <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+        <div class="kt-header-mobile__logo">
+            <a href="index.html">
+                <img alt="Logo" src="/assets/media/logos/logo-6-sm.png" />
+            </a>
+        </div>
+        <div class="kt-header-mobile__toolbar">
+            <div class="kt-header-mobile__toolbar-toggler kt-header-mobile__toolbar-toggler--left" id="kt_aside_mobile_toggler"><span></span></div>
+            <div class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler"><span></span></div>
+            <div class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></div>
+        </div>
+    </div>
+    <!-- end:: Header Mobile -->
+
+
+    <div class="kt-grid kt-grid--hor kt-grid--root">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+            <!-- begin:: Aside -->
+            <button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+            <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
+
+                <!-- begin:: Aside Menu -->
+                <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
+                    <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
+                        <ul class="kt-menu__nav ">
+                            <li class="kt-menu__item  kt-menu__item--active" aria-haspopup="true"><a asp-controller="Home" asp-action="Index" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-protection"></i><span class="kt-menu__link-text">仪表板</span></a></li>
+
+                            <!-- begin:: 订单管理 Menu -->
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-list"></i><span class="kt-menu__link-text">订单管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">订单管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Order" asp-action="@ViewData["OrderListAction"]" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">订单总览</span></a></li>
+                                        <!--<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">支付中</span></a></li>
+        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">已超时</span></a></li>
+        <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">异常</span></a></li>
+    -->
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- end:: 订单管理 Menu -->
+                            <!-- begin:: 商户管理 Menu -->
+                            @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.ShopAgent))
+                            {
+                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-supermarket"></i><span class="kt-menu__link-text">商户管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu ">
+                                        <span class="kt-menu__arrow"></span>
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">商户管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="ShopAgent" asp-action="@ViewData["ShopAgentListAction"]" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">代理列表</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Shop" asp-action="@ViewData["ShopAgentListAction"]" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">商户列表</span></a></li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核信息</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu ">
+                                                    <span class="kt-menu__arrow"></span>
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="ShopAgent" asp-action="PendingReview" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">商户代理</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Shop" asp-action="PendingReview" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">商户</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
+                            <!-- end:: 商户管理 Menu -->
+                            <!-- begin:: 组织管理 Menu -->
+                            @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.TraderAgent))
+                            {
+                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-group"></i><span class="kt-menu__link-text">码商管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu ">
+                                        <span class="kt-menu__arrow"></span>
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true">
+                                                <span class="kt-menu__link">
+                                                    <span class="kt-menu__link-text">组织管理</span>
+                                                    <span class="kt-menu__link-badge">
+                                                        <span class="kt-badge kt-badge--brand">6</span>
+                                                    </span>
+                                                </span>
+                                            </li>
+                                            <li class="kt-menu__item " aria-haspopup="true">
+                                                <a asp-controller="TraderAgent" asp-action="@ViewData["TraderAgentListAction"]" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--line">
+                                                        <span></span>
+                                                    </i>
+                                                    <span class="kt-menu__link-text">代理列表</span>
+                                                </a>
+                                            </li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Trader" asp-action="@ViewData["TraderAgentListAction"]" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">交易员列表</span></a></li>
+                                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核信息</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu ">
+                                                    <span class="kt-menu__arrow"></span>
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="TraderAgent" asp-action="PendingReview" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">代理</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Trader" asp-action="PendingReview" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">交易员</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
+
+                            <!-- end:: 商户管理 Menu -->
+                            <!-- begin:: 二维码管理 Menu -->
+                            @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.TraderAgent) || User.IsInRole(Roles.Trader))
+                            {
+                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon"><img src="~/lib/metronic/dist/assets/media/icons/svg/Shopping/Barcode-read.svg" /></i><span class="kt-menu__link-text">二维码管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu ">
+                                        <span class="kt-menu__arrow"></span>
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">二维码管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="ManualCode" asp-action="Index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">二维码列表</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="ManualCode" asp-action="PendingReview" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">待审核资料</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
+                            <!-- end:: 二维码管理 Menu -->
+                            <!-- begin:: 提现与入金 Menu -->
+                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon-coins"></i><span class="kt-menu__link-text">提现与入金</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">提现与入金</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">提现管理</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                            <div class="kt-menu__submenu ">
+                                                <span class="kt-menu__arrow"></span>
+                                                <ul class="kt-menu__subnav">
+                                                    <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Withdrawal" asp-action="Index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">提现纪录</span></a></li>
+                                                    <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Withdrawal" asp-action="PendingReview" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">待处理</span></a></li>
+                                                    <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Withdrawal" asp-action="BankOption" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">提现银行选项</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Trader) || User.IsInRole(Roles.TraderAgent))
+                                        {
+                                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">入金管理</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="kt-menu__submenu ">
+                                                    <span class="kt-menu__arrow"></span>
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Deposit" asp-action="Index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">入金纪录</span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Deposit" asp-action="PendingReview" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">待处理 </span></a></li>
+                                                        <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Deposit" asp-action="DepositBankAccount" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">收款账户</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- end:: 提现与入金 Menu -->
+                            <!--<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-pin"></i><span class="kt-menu__link-text">活动纪录</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+        <div class="kt-menu__submenu ">
+            <span class="kt-menu__arrow"></span>
+            <ul class="kt-menu__subnav">
+                <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">活动纪录</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">审核纪录</span></a></li>
+                <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">订单异动</span></a></li>
+                <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">登录纪录</span></a></li>
+                <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">角色异动</span></a></li>
+                <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">管理帐户异动</span></a></li>
+            </ul>
+        </div>
+    </li>
+                            <li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-graphic-1"></i><span class="kt-menu__link-text">财务报表</span></a></li>
+           -->
+                            @if (User.IsInRole(Roles.Manager))
+                            {
+                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon-users-1"></i><span class="kt-menu__link-text">管理员管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">2</span></span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu ">
+                                        <span class="kt-menu__arrow"></span>
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">管理员管理</span><span class="kt-menu__link-badge"><span class="kt-badge kt-badge--brand">6</span></span></span></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Manager" asp-action="Index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">帐户配置</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="Role" asp-action="Index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">角色配置</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon flaticon2-gear"></i><span class="kt-menu__link-text">系统设置</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu ">
+                                        <span class="kt-menu__arrow"></span>
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">系统设置</span></span></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="SystemConfiguration" asp-action="SiteBaseInfo" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">基本讯息</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="SystemConfiguration" asp-action="Payment" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">支付</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="SystemConfiguration" asp-action="SystemNotificationSound" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">提示音</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="SystemConfiguration" asp-action="UserNotification" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">用户通知</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="SystemConfiguration" asp-action="WithdrawalAndDeposit" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">提现</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a asp-controller="SystemConfiguration" asp-action="PaymentChannel" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">通道</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Aside Menu -->
+            </div>
+            <!-- end:: Aside -->
+
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+                <!-- begin:: Header -->
+                <div id="kt_header" class="kt-header kt-grid kt-grid--ver  kt-header--fixed ">
+
+                    <!-- begin:: Aside -->
+                    <div class="kt-header__brand kt-grid__item  " id="kt_header_brand">
+                        <div class="kt-header__brand-logo">
+                            <a href="index.html">
+                                <img alt="Logo" src="/assets/media/logos/logo-6.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <!-- end:: Aside -->
+                    <!-- begin:: Title -->
+                    <h3 class="kt-header__title kt-grid__item">
+                        @settings.Value.SiteBaseInfo.SiteTitle
+                    </h3>
+                    <!-- end:: Title -->
+                    <!-- begin: Header Menu -->
+                    <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+                    <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
+                        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+                            <ul class="kt-menu__nav ">
+                                <li class="kt-menu__item  kt-menu__item--active " aria-haspopup="true"><a href="index.html" class="kt-menu__link "><span class="kt-menu__link-text">仪表板</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end: Header Menu -->
+                    <!-- begin:: Header Topbar -->
+                    <partial name="_LoginPartial" />
+                    <!-- end:: Header Topbar -->
+                </div>
+                <!-- end:: Header -->
+
+                @RenderBody()
+
+                <!-- begin:: Footer -->
+                <div class="kt-footer  kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
+                    <div class="kt-container  kt-container--fluid ">
+                        <div class="kt-footer__copyright">
+                            2019&nbsp;&copy;&nbsp;<a asp-controller="Home" asp-action="Index" target="_blank" class="kt-link">@settings.Value.SiteBaseInfo.SiteTitle</a>
+                        </div>
+                        <div class="kt-footer__menu">
+                            <a href="" target="_blank" class="kt-footer__menu-link kt-link">About</a>
+                            <a href="" target="_blank" class="kt-footer__menu-link kt-link">Team</a>
+                            <a href="" target="_blank" class="kt-footer__menu-link kt-link">Contact</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end:: Footer -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- begin::Global Config(global config for global JS sciprts) -->
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#22b9ff",
+                    "light": "#ffffff",
+                    "dark": "#282a3c",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995"
+                },
+                "base": {
+                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+                }
+            }
+        };
+
+    </script>
+    <!-- end::Global Config -->
+    <!--begin::Global Theme Bundle(used by all pages) -->
+    <script src="~/lib/metronic/dist/assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+    <script src="~/lib/metronic/dist/assets/js/scripts.bundle.js" type="text/javascript"></script>
+
+    <script src="~/js/shared/signalr.js"></script>
+    <script src="~/js/system_notification.js"></script>
+
+    <script src="~/js/site.js"></script>
+    <!--end::Global Theme Bundle -->
+    <!--begin::Page Scripts(used by this page) -->
+    <!--end::Page Scripts -->
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

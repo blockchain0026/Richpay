@@ -1,0 +1,279 @@
+﻿@model WebMVC.ViewModels.OrderViewModels.PayViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>截图到相册 - 扫码付款</title>
+    <link href="~/js/pay2/pay.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="~/js/pay2/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/pay2/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="~/js/pay2/layui.js"></script>
+    <script type="text/javascript" src="~/js/pay2/clipboard.min.js"></script>
+    <link id="layuicss-layer" rel="stylesheet" href="~/js/pay2/layer.css" media="all">
+</head>
+<body class="qrcode_page">
+    <div class="container">
+        <div class="logo">付款成功后，5分钟内未到账，请立即联系客服！</div>
+        <div class="box_top"><img src="~/js/pay2/box_top.png"></div>
+        <div class="box">
+            <h1>￥<span>200.00</span></h1>
+            <h2 id="orderSN_data">
+                <span class="orderSN_data_No">
+                    订单号：
+                    <span>5501132344498860679</span>
+                </span>
+                <span class="orderSN_data_copy" data-clipboard-text="5501132344498860679">复制</span>
+            </h2>
+        </div>
+        <div><img src="~/js/pay2/box_middle.png"></div>
+        <div class="box h300" style="padding:1px 0">
+            <div class="tips" style="margin-bottom:10px">
+                <p style="margin: 0px;font-size:15px;font-weight:bold;color: #01a9f4">
+                    截图保存相册 →
+                    <span>打开支付宝</span>
+                    → 识别二维码付款
+                </p>
+            </div>
+            <div class="qrcode_box" style="position:relative">
+                <div id="qrcode" style="display: block; width: 210px; height: 210px;background:url(/static/images/qrcode_loading.png) center top;">
+                    <img src="@Model.QrCodeImageData" alt="" style="height:210px;width:210px" />
+                </div>
+
+                <div id="loading" style="display: none;">
+                    <span class="loading"></span>
+                    <span class="load-text">正在载入二维码...</span>
+                </div>
+
+            </div>
+            <span class="tip">请在下面时间内完成付款</span>
+            <div class="time">
+                <strong id="minute_show" style="background:#01a9f4"><s></s>04</strong><span class="time_dot" style="color:#01a9f4">:</span><strong id="second_show" style="background:#01a9f4"><s></s>32</strong>
+            </div>
+            <div class="ico-scan_alipay_qr"></div>
+            <div id="tipText" style="width: 100%;height:56px;margin-top: 15px;">
+                <div style="width: 45%;height:56px;float: left;">
+                    <img src="~/js/pay2/alipay_qr_scan.png" alt="" style="width: 40px;height:40px;float: right;margin-right: 18px;margin-top: 8px;">
+                </div>
+                <div id="showtext" style="line-height: 56px;height: 56px; width: 48%;float: left;text-align: left;padding-left: 2%;font-size: 18px;">
+                    <span style="width: 100px;height:40px;line-height:40px;margin-top:8px;border-radius: 5px;color: white;background:#01a9f4;display:block;text-align:center">打开支付宝</span>
+                </div>
+            </div>
+
+            <div id="leftCaption">
+                <span class="leftCaption1">
+                    请按提单金额付款
+                </span>
+                <span class="leftCaption2">
+                    ，否则不到账
+                </span>
+            </div>
+            <div id="rightCaption">
+                <span class="rightCaption1">
+                    请勿重复扫码付款
+                </span>
+                <span class="rightCaption2">
+                    ，否则不到账
+                </span>
+            </div>
+        </div>
+        <div><img src="~/js/pay2/box_bottom.png"></div>
+    </div>
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.alert('温馨提示', {
+                title: "注意事项",
+                content: '<div>\
+                                    <p><span style="font-size:16px;color:red;font-weight:bold;">1.不要重复扫码付款</span>，否则不到账</p>\
+                                    <p><span style="font-size:16px;color:red;font-weight:bold;">2.付款金额与订单金额一致</span>，否则不到账</p>\
+                                    <p><span style="font-size:16px;color:red;font-weight:bold;">3.付款成功后5分钟未到账</span>，请联系客服处理</p>\
+                                </div>'
+            });
+        });
+
+        $('#showtext').click(function () {
+            window.location = "alipays://platformapi/startapp?saId=10000007";
+        });
+
+        var alicode_timer;
+        var myTimer;
+        var count = 3;
+
+        jQuery(function () {
+            var clipboard = new ClipboardJS('.orderSN_data_copy');
+            clipboard.on('success', function (e) {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.msg("复制成功");
+                });
+                e.clearSelection();
+            });
+
+            get_qrcode();
+        })
+
+        function get_qrcode() {
+
+            /*jQuery('#qrcode').qrcode({
+                width: 210,
+                height: 210,
+                text: data.qrcode
+            });*/
+
+            /*$.ajax({
+                type:"POST",
+                dataType:"JSON",
+                url:"/getqrcode",
+                data:JSON.stringify({ "order_sn" : "107157893030105804605080"}),
+                success: function(data){
+
+                        if (data.code == 1){
+
+                            $("#loading").css("display","none");
+
+                            $("#qrcode").html('');
+
+                            jQuery('#qrcode').qrcode({
+                                width: 210,
+                                height: 210,
+                                text: data.qrcode
+                            });
+
+                            alicode_timer = window.setInterval(function(){
+                                check_pay_result();
+                            },2000)
+
+                        }else if(data.code == 10){
+
+                            if(count <= 0){
+
+                                 $("#loading").hide();
+                                 $("#qrcode").html('');
+                                 $("#qrcode").css("background-image","url('/static/images/msg.png')");
+                                 $("#qrcode").css("background-size","100%");
+
+                                 $('.tip').html('<b class="red">二维码匹配失败，请稍后再试</b>');
+                            }else{
+                                setTimeout(function(){
+                                    get_qrcode();
+                                    count--;
+                                },2000)
+                            }
+
+                        }else {
+
+                             setTimeout(function(){
+                                get_qrcode();
+                             },2000)
+
+                        }
+
+                }
+            });*/
+        }
+
+        function timer(intDiff) {
+
+            myTimer = window.setInterval(function () {
+
+                var day = 0,
+                    hour = 0,
+                    minute = 0,
+                    second = 0;
+                if (intDiff > 0) {
+                    day = Math.floor(intDiff / (60 * 60 * 24));
+                    hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                    minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                    second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                }
+
+                if (minute <= 9) minute = '0' + minute;
+                if (second <= 9) second = '0' + second;
+
+                $('#minute_show').html('<s></s>' + minute);
+                $('#second_show').html('<s></s>' + second);
+
+                if (hour <= 0 && minute <= 0 && second <= 0) {
+
+                    qrcode_timeout();
+                    clearInterval(myTimer);
+                    window.clearInterval(alicode_timer);
+                }
+                intDiff--;
+
+
+            }, 1000);
+        }
+
+        timer(300);
+
+
+        function qrcode_timeout() {
+            $("#qrcode").html('');
+            $("#qrcode").css("background-image", "url('/static/images/qrcode_timeout.png')");
+
+            $('.tip').html('<b class="red">二维码已失效</b>');
+            $("#loading").hide();
+        }
+
+
+        function check_pay_result() {
+            $.post(
+                "/result",
+                {
+                    "order_no": "107157893030105804605080"
+                },
+                function (data) {
+
+                    if (data.success == 0) {
+
+                        window.clearInterval(myTimer);
+                        window.clearInterval(alicode_timer);
+
+                        $("#qrcode").html('');
+                        $("#qrcode").css("background-image", "url('/static/images/pay_ok.png')");
+
+                        $('#minute_show').html('<s>00</s>');
+                        $('#second_show').html('<s>00</s>');
+
+
+
+                        var i = 10;
+
+                        jump_timer = setInterval(function () {
+
+                            $(".tip").html('<b class="red">' + i + '</b>秒后跳转至商户页');
+
+                            i--;
+
+                            if (i < 0) {
+
+                                clearInterval(jump_timer);
+
+                                $("#msg").html('正在跳转至商户页...');
+
+                                if (data.return_url != null) {
+
+                                    window.location = data.return_url;
+
+                                }
+                            }
+
+
+                        }, 5000);
+
+                    }
+
+                }
+            );
+        }</script>
+
+</body>
+</html>

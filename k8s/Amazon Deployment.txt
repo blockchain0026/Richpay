@@ -1,0 +1,30 @@
+1. Create Amazon EKS Service Role (tutorial:https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html)
+
+2. Create Cluster VPC 
+  2-1. Record the SecurityGroups value: sg-08495fcb72fbce15c
+  2-2. Record the SubnetIds: subnet-0cf820d7620485905,subnet-0fbd9e16fcdbb737b,subnet-066384748a7fd8570,subnet-076f2215fc8161751
+  2-3. Record the VpcId: vpc-067a4278d22d28c8b
+
+3.Tag ALL your Private subnets for internal load balancers.
+  key: kubernetes.io/role/internal-elb
+  value: 1
+
+4.Tag ALL your Public subnets for external load balancers.
+  key: kubernetes.io/role/elb
+  value: 1
+
+5.Create your cluster.
+
+6.Configure your aks cli.
+AKIAWAQWMA6XELG6JAYD
+DYZz4Hu+uYTOPmcLWEwq01EtF5zuB3Xj/O4kzN2B
+
+
+7.Create / Update kubeconfig.
+  aws eks --region region-code update-kubeconfig --name cluster_name
+  (hongkong region code: ap-east-1)
+
+8.
+
+
+  

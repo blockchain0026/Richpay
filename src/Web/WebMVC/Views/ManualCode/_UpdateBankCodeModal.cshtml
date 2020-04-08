@@ -1,0 +1,65 @@
+﻿@using WebMVC.Models
+<div id="modal__update_bank_qrcode_data" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">更新二维码数据</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_update_bank_qrcode_data" asp-controller="ManualCode" asp-action="UpdateBankCode" class="kt-form" method="post">
+                    <div class="form-group">
+                        <label for="userId" class="form-control-label">二维码编号 :</label>
+                        <input type="text" class="form-control" name="qrcodeid" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="">银行名称*</label>
+                        <div class="">
+                            <select class="form-control kt-select2" id="select_update_bank_bankname" name="bankselect">
+                                <option value="">请选择...</option>
+                                <option data-bankname="中国工商银行" data-bankmark="ICBC">中国工商银行</option>
+                                <option data-bankname="中国建设银行" data-bankmark="CCB">中国建设银行</option>
+                                <option data-bankname="汇丰银行" data-bankmark="HSBC">汇丰银行</option>
+                                <option data-bankname="中国银行" data-bankmark="BC">中国银行</option>
+                                <option data-bankname="中国农业银行" data-bankmark="ABC">中国农业银行</option>
+                                <option data-bankname="交通银行" data-bankmark="BC">交通银行</option>
+                                <option data-bankname="招商银行" data-bankmark="CMB">招商银行</option>
+                                <option data-bankname="中国民生银行" data-bankmark="CMB">中国民生银行</option>
+                                <option data-bankname="上海浦东发展银行" data-bankmark="SPDB">上海浦东发展银行</option>
+                                <option data-bankname="中国光大银行" data-bankmark="CEB">中国光大银行</option>
+                                <option data-bankname="华夏银行" data-bankmark="HB">华夏银行</option>
+                                <option data-bankname="广东发展银行" data-bankmark="GDB">广东发展银行</option>
+                                <option data-bankname="深圳发展银行" data-bankmark="SDB">深圳发展银行</option>
+                                <option data-bankname="兴业银行" data-bankmark="CIB">兴业银行</option>
+                                <option data-bankname="国家开发银行" data-bankmark="CDB">国家开发银行</option>
+                                <option data-bankname="中国进出口银行" data-bankmark="EIBC">中国进出口银行</option>
+                                <option data-bankname="中国农业发展银行" data-bankmark="ADBC">中国农业发展银行</option>
+                            </select>
+                            <input name="bankname" class="form-control" type="text" placeholder="" hidden>
+                            <input name="bankmark" class="form-control" type="text" placeholder="" hidden>
+
+                            <span class="form-text text-muted">选择到账银行。</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="">银行户名*</label>
+                        <div class="">
+                            <input name="accountname" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="">银行卡号*</label>
+                        <div class="">
+                            <input name="cardnumber" class="form-control" type="text">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-dismiss="modal">取消</button>
+                <a href="#" data-action="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">提交</a>
+            </div>
+        </div>
+    </div>
+</div>

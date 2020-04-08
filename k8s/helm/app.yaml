@@ -1,0 +1,10 @@
+# This helm values file defines app-based settings
+# Charts use those values, so this file **MUST** be included in all chart releases
+
+app:                                                    # app global settings
+  name: "my-eshop"                                      # Override for custom app name
+  ingress:                                              # ingress related settings
+    entries:
+      mvc: ""                                           # ingress entry for web mvc
+  svc:
+      mvc: webmvc                                       # service name for web mvc
